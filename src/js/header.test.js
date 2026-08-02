@@ -1,11 +1,21 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { initHeaderBurger } from './header.js';
+import { initHeaderBurger, markActiveNavLink } from './header.js';
 
 function renderHeader() {
   document.body.innerHTML = `
     <button class="header__burger" aria-expanded="false"></button>
     <div class="header__nav"></div>
   `;
+}
+
+function renderNav() {
+  document.body.innerHTML = `
+    <nav class="nav-toggle">
+      <a href="/" class="nav-toggle__link is-active">Home</a>
+      <a href="/favorites.html" class="nav-toggle__link">Favorites</a>
+    </nav>
+  `;
+  return document.querySelector('.nav-toggle');
 }
 
 describe('initHeaderBurger', () => {
@@ -39,5 +49,32 @@ describe('initHeaderBurger', () => {
   it('does nothing when the burger or nav is missing from the DOM', () => {
     document.body.innerHTML = '';
     expect(() => initHeaderBurger()).not.toThrow();
+  });
+});
+
+describe('markActiveNavLink', () => {
+  it('marks Home active on the root path', () => {
+    const nav = renderNav();
+    markActiveNavLink(nav, '/');
+
+    const [home, favorites] = nav.querySelectorAll('.nav-toggle__link');
+    expect(home.classList.contains('is-active')).toBe(true);
+    expect(favorites.classList.contains('is-active')).toBe(false);
+  });
+
+  it('marks Favorites active on /favorites.html', () => {
+    const nav = renderNav();
+    markActiveNavLink(nav, '/favorites.html');
+
+    const [home, favorites] = nav.querySelectorAll('.nav-toggle__link');
+    expect(home.classList.contains('is-active')).toBe(false);
+    expect(favorites.classList.contains('is-active')).toBe(true);
+  });
+
+  it('treats /index.html the same as the root path', () => {
+    const nav = renderNav();
+    markActiveNavLink(nav, '/index.html');
+
+    expect(nav.querySelector('a[href="/"]').classList.contains('is-active')).toBe(true);
   });
 });

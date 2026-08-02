@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+/*
+ * Must win over any component class that sets its own `display` — otherwise
+ * a class like `.exercises__back-btn { display: inline-flex }` has equal
+ * specificity to the UA's `[hidden] { display: none }` and can override it
+ * depending on load order, silently un-hiding elements toggled via `.hidden`.
+ */
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
 }

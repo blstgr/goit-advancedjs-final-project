@@ -21,6 +21,7 @@ function renderModalMarkup() {
       <span data-modal-popularity></span>
       <span data-modal-calories></span>
       <p data-modal-description></p>
+      <div data-modal-video></div>
       <button data-modal-favorite-toggle data-favorited="false">
         <span data-modal-favorite-label>Add to favorites</span>
       </button>
@@ -38,6 +39,7 @@ const EXERCISE = {
   burnedCalories: 8,
   rating: 4,
   description: 'A classic bodyweight exercise.',
+  gifUrl: 'https://ftp.goit.study/img/power-pulse/gifs/push-up.gif',
 };
 
 describe('initExerciseModal', () => {
@@ -58,6 +60,23 @@ describe('initExerciseModal', () => {
     expect(root.querySelector('[data-modal-name]').textContent).toBe('Push-up');
     expect(root.querySelector('[data-modal-target]').textContent).toBe('Pectorals');
     expect(root.querySelector('[data-modal-calories]').textContent).toBe('8');
+  });
+
+  it('renders the demonstration gif from the exercise data', () => {
+    const modal = initExerciseModal(root, { storage });
+
+    modal.open(EXERCISE);
+
+    const img = root.querySelector('[data-modal-video] img');
+    expect(img.getAttribute('src')).toBe(EXERCISE.gifUrl);
+  });
+
+  it('renders no media element when the exercise has no gifUrl', () => {
+    const modal = initExerciseModal(root, { storage });
+
+    modal.open({ ...EXERCISE, gifUrl: undefined });
+
+    expect(root.querySelector('[data-modal-video] img')).toBeNull();
   });
 
   it('starts the favorite button in the "Add to favorites" state', () => {

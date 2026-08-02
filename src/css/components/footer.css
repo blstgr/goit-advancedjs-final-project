@@ -24,7 +24,16 @@
 
 .footer__subscribe {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-sm);
+}
+
+.footer__subscribe-message {
+  flex-basis: 100%;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--color-gray);
+  min-height: var(--lh-sm);
 }
 
 .footer__subscribe-input {

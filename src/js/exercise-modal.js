@@ -23,6 +23,15 @@ export function initExerciseModal(root, { storage = window.localStorage } = {}) 
     setFavoriteButtonState(root, isFavorite(currentExercise.id, storage));
   });
 
+  function renderMedia(exercise) {
+    const mediaEl = root.querySelector('[data-modal-video]');
+    if (!mediaEl) return;
+
+    mediaEl.innerHTML = exercise.gifUrl
+      ? `<img class="modal__media-img" src="${exercise.gifUrl}" alt="Демонстрація виконання вправи ${exercise.name}" loading="lazy" />`
+      : '';
+  }
+
   function renderExercise(exercise) {
     currentExercise = exercise;
 
@@ -32,6 +41,7 @@ export function initExerciseModal(root, { storage = window.localStorage } = {}) 
     root.querySelector('[data-modal-popularity]').textContent = exercise.popularity ?? '—';
     root.querySelector('[data-modal-calories]').textContent = exercise.burnedCalories;
     root.querySelector('[data-modal-description]').textContent = exercise.description ?? '';
+    renderMedia(exercise);
 
     const ratingEl = root.querySelector('[data-modal-rating]');
     ratingEl.dataset.rating = String(exercise.rating ?? 0);
@@ -46,20 +56,4 @@ export function initExerciseModal(root, { storage = window.localStorage } = {}) 
   }
 
   return { open, close: modal.close, isOpen: modal.isOpen };
-}
-
-/**
- * Wires every [data-open-exercise] trigger on the page to open the modal.
- * `getExerciseById` is injected so this can start with an in-memory sample
- * dataset today and swap in a real `GET /exercises/{id}` call later without
- * touching this wiring.
- */
-export function initExerciseModalDelegation(modalController, getExerciseById) {
-  document.addEventListener('click', async (event) => {
-    const trigger = event.target.closest('[data-open-exercise]');
-    if (!trigger) return;
-
-    const exercise = await getExerciseById(trigger.dataset.openExercise);
-    if (exercise) modalController.open(exercise);
-  });
 }

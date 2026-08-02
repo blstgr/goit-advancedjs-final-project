@@ -48,6 +48,13 @@
   border-radius: var(--space-xs);
   background-color: var(--color-border-on-light);
   margin-bottom: var(--space-lg);
+  overflow: hidden;
+}
+
+.modal__media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .modal__title {

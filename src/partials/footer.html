@@ -43,7 +43,7 @@
       </li>
     </ul>
 
-    <form class="footer__subscribe" novalidate>
+    <form class="footer__subscribe" data-subscribe-form>
       <label class="visually-hidden" for="subscribe-email">Email для розсилки</label>
       <input
         id="subscribe-email"
@@ -55,6 +55,7 @@
         pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
       />
       <button class="btn btn--outline" type="submit">Send</button>
+      <p class="footer__subscribe-message" data-subscribe-message role="status" aria-live="polite"></p>
     </form>
   </div>
 </footer>
