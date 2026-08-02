@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": [
+      "mcp__claude_ai_Figma__get_design_context",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "mcp__claude_ai_Figma__download_assets",
+      "mcp__atlassian-jira-dc__jira_searchIssues",
+      "mcp__atlassian-jira-dc__jira_getIssue",
+      "Bash(npm view *)"
+    ],
+    "deny": [
+      "Bash(git push *)",
+      "Bash(rm *)",
+      "Bash(rmdir *)",
+      "Bash(unlink *)",
+      "Bash(git clean *)"
+    ]
+  }
+}

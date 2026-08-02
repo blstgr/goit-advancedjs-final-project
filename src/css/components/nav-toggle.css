@@ -1,0 +1,24 @@
+.nav-toggle {
+  position: relative;
+  display: inline-flex;
+  background-color: var(--color-dark);
+  border-radius: var(--radius-track);
+  padding: var(--space-2xs);
+  gap: var(--space-2xs);
+}
+
+.nav-toggle__link {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  color: var(--color-light);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  transition: color var(--transition-fast);
+}
+
+.nav-toggle__link.is-active {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}

@@ -1,0 +1,69 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.pagination__arrows {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.pagination__arrow-btn,
+.pagination__jump-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  border: 1px solid var(--color-border-on-light);
+  border-radius: 50%;
+  color: var(--color-dark);
+}
+
+.pagination__icon {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+}
+
+.pagination__jump-btn .pagination__icon:last-child {
+  /* overlap the two stacked chevrons to form a "skip" glyph */
+  margin-left: calc(-1 * (var(--size-icon-sm) - var(--space-xs)));
+}
+
+.pagination__arrow-btn--next .pagination__icon,
+.pagination__jump-btn--end .pagination__icon {
+  transform: rotate(180deg);
+}
+
+.pagination__numbers {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.pagination__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  padding: 0 var(--space-sm);
+  border-radius: var(--radius-page-num);
+  font-size: var(--fs-xl);
+  line-height: var(--lh-xl);
+  letter-spacing: 0.04em;
+  color: var(--color-gray);
+}
+
+.pagination__num.is-active {
+  border: 1px solid var(--color-dark);
+  color: var(--color-dark);
+}
+
+.pagination__ellipsis {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-xl);
+  color: var(--color-gray);
+}

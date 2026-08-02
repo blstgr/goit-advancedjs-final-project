@@ -1,0 +1,121 @@
+<section class="ui-kit container">
+  <h1 class="ui-kit__title">UI Kit — базові компоненти</h1>
+  <p class="ui-kit__note">
+    Демонстрація атомарних компонентів з Figma UI Kit для візуальної перевірки. Не є фінальною
+    сторінкою застосунку.
+  </p>
+
+  <div class="ui-kit__grid">
+    <article class="ui-kit__block">
+      <h2 class="ui-kit__block-title">Buttons</h2>
+      <div class="ui-kit__row ui-kit__row--dark">
+        <button class="btn btn--favorite" type="button" data-favorite-toggle data-favorited="false">
+          <img class="btn__icon" src="/src/images/icon-heart.svg" alt="" data-favorite-icon />
+          <span data-favorite-label>Add to favorites</span>
+        </button>
+        <button class="btn btn--outline" type="button">Give a rating</button>
+      </div>
+    </article>
+
+    <article class="ui-kit__block">
+      <h2 class="ui-kit__block-title">Inputs</h2>
+      <div class="ui-kit__row">
+        <form class="search" data-search-form>
+          <label class="visually-hidden" for="ui-kit-search">Пошук вправ</label>
+          <input
+            id="ui-kit-search"
+            class="search__input"
+            type="search"
+            name="keyword"
+            placeholder="Search"
+            data-search-input
+          />
+          <button class="search__submit-btn" type="submit" aria-label="Пошук">
+            <img src="/src/images/icon-search.svg" alt="" />
+          </button>
+          <button
+            class="search__clear-btn"
+            type="button"
+            aria-label="Очистити пошук"
+            data-search-clear
+          >
+            <img src="/src/images/icon-close.svg" alt="" />
+          </button>
+        </form>
+      </div>
+    </article>
+
+    <article class="ui-kit__block">
+      <h2 class="ui-kit__block-title">Menu</h2>
+      <div class="ui-kit__row">
+        <nav class="nav-toggle" data-nav-toggle aria-label="Приклад перемикача">
+          <a href="#" class="nav-toggle__link is-active">Home</a>
+          <a href="#" class="nav-toggle__link">Favorites</a>
+        </nav>
+      </div>
+    </article>
+
+    <article class="ui-kit__block ui-kit__block--dark">
+      <h2 class="ui-kit__block-title">Rating</h2>
+      <div class="ui-kit__row">
+        <div class="rating" data-rating="0"></div>
+        <div class="rating" data-rating="4"></div>
+      </div>
+    </article>
+
+    <article class="ui-kit__block">
+      <h2 class="ui-kit__block-title">Pagination</h2>
+      <div class="ui-kit__row">
+        <nav class="pagination" data-pagination aria-label="Пагінація">
+          <div class="pagination__arrows">
+            <button class="pagination__jump-btn" type="button" aria-label="До першої сторінки">
+              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
+              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
+            </button>
+            <button class="pagination__arrow-btn" type="button" aria-label="Попередня сторінка">
+              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
+            </button>
+          </div>
+          <div class="pagination__numbers" data-pagination-numbers>
+            <button class="pagination__num is-active" type="button" data-page="1">1</button>
+            <button class="pagination__num" type="button" data-page="2">2</button>
+            <button class="pagination__num" type="button" data-page="3">3</button>
+            <span class="pagination__ellipsis">...</span>
+          </div>
+          <div class="pagination__arrows">
+            <button class="pagination__arrow-btn pagination__arrow-btn--next" type="button" aria-label="Наступна сторінка">
+              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
+            </button>
+            <button class="pagination__jump-btn pagination__jump-btn--end" type="button" aria-label="До останньої сторінки">
+              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
+              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
+            </button>
+          </div>
+        </nav>
+      </div>
+    </article>
+
+    <article class="ui-kit__block ui-kit__block--dark">
+      <h2 class="ui-kit__block-title">Socials</h2>
+      <div class="ui-kit__row">
+        <ul class="socials socials--on-dark">
+          <li>
+            <a class="socials__link" href="https://www.facebook.com/goITclub/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <img class="socials__icon" src="/src/images/social-facebook-light.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a class="socials__link" href="https://www.instagram.com/goitclub/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <img class="socials__icon" src="/src/images/social-instagram-light.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a class="socials__link" href="https://www.youtube.com/c/GoIT" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <img class="socials__icon" src="/src/images/social-youtube-light.svg" alt="" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>

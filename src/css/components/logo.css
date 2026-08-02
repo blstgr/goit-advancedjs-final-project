@@ -1,0 +1,13 @@
+.logo {
+  display: inline-flex;
+  color: var(--color-dark);
+}
+
+.logo__img {
+  width: 132px;
+  height: 24px;
+}
+
+.logo--on-dark {
+  color: var(--color-light);
+}

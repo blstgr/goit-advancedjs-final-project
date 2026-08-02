@@ -1,0 +1,49 @@
+:root {
+  /* Colors — YourEnergy UI Kit (Figma) */
+  --color-dark: #242424;
+  --color-light: #f4f4f4;
+  --color-gray: #d4d4d4;
+  --color-accent: #eea10c;
+  --color-white: #ffffff;
+
+  --color-border-on-dark: rgba(244, 244, 244, 0.1);
+  --color-border-on-light: rgba(36, 36, 36, 0.1);
+
+  /* Typography */
+  --font-family-base: 'DM Sans', sans-serif;
+
+  --fs-sm: 12px;
+  --lh-sm: 18px;
+  --fs-base: 16px;
+  --lh-base: 24px;
+  --fs-lg: 18px;
+  --lh-lg: 24px;
+  --fs-xl: 24px;
+  --lh-xl: 32px;
+
+  /* Radii */
+  --radius-pill: 30px;
+  --radius-track: 60px;
+  --radius-icon-box: 10px;
+  --radius-page-num: 18px;
+
+  /* Spacing */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 24px;
+
+  /* Icon sizes */
+  --size-icon-xs: 18px;
+  --size-icon-sm: 20px;
+  --size-icon-md: 28px;
+  --size-icon-lg: 32px;
+
+  /* Layout */
+  --layout-max-width: 1440px;
+  --layout-gutter: 16px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+}

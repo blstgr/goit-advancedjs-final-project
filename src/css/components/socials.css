@@ -1,0 +1,30 @@
+.socials {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.socials__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs);
+  border-radius: var(--radius-icon-box);
+  border: 1px solid var(--color-border-on-light);
+}
+
+.socials__icon {
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.socials__link:hover .socials__icon {
+  opacity: 1;
+}
+
+/* On dark surfaces (e.g. footer) */
+.socials--on-dark .socials__link {
+  border-color: var(--color-border-on-dark);
+}

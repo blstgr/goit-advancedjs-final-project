@@ -1,0 +1,60 @@
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="/" class="logo logo--on-dark" aria-label="YourEnergy — на головну">
+        <img class="logo__img" src="/src/images/logo.svg" alt="YourEnergy" />
+      </a>
+      <p class="footer__slogan">Твоя енергія. Твої результати.</p>
+    </div>
+
+    <ul class="socials socials--on-dark" aria-label="Соціальні мережі GoIT">
+      <li>
+        <a
+          class="socials__link"
+          href="https://www.facebook.com/goITclub/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          <img class="socials__icon" src="/src/images/social-facebook-light.svg" alt="" />
+        </a>
+      </li>
+      <li>
+        <a
+          class="socials__link"
+          href="https://www.instagram.com/goitclub/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <img class="socials__icon" src="/src/images/social-instagram-light.svg" alt="" />
+        </a>
+      </li>
+      <li>
+        <a
+          class="socials__link"
+          href="https://www.youtube.com/c/GoIT"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="YouTube"
+        >
+          <img class="socials__icon" src="/src/images/social-youtube-light.svg" alt="" />
+        </a>
+      </li>
+    </ul>
+
+    <form class="footer__subscribe" novalidate>
+      <label class="visually-hidden" for="subscribe-email">Email для розсилки</label>
+      <input
+        id="subscribe-email"
+        class="footer__subscribe-input"
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+        pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+      />
+      <button class="btn btn--outline" type="submit">Send</button>
+    </form>
+  </div>
+</footer>

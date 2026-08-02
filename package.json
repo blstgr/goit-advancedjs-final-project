@@ -1,0 +1,27 @@
+{
+  "name": "your-energy",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "license": "ISC",
+  "description": "YourEnergy — команда потоку GoIT, Advanced JavaScript and TypeScript: Tools and Best Practices",
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "jsdom": "^29.1.1",
+    "prettier": "^3.9.6",
+    "vite": "^8.2.0",
+    "vite-plugin-html-inject": "^1.1.2",
+    "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "modern-normalize": "^3.0.1"
+  }
+}
