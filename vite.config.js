@@ -11,6 +11,7 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         favorites: resolve(import.meta.dirname, 'favorites.html'),
+        uiKit: resolve(import.meta.dirname, 'ui-kit.html'),
       },
     },
   },

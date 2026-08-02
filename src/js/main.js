@@ -6,11 +6,19 @@ import { initExerciseModal } from './exercise-modal.js';
 import { initQuote } from './quote.js';
 import { initHomePage } from './home.js';
 import { initFavoritesPage } from './favorites.js';
+import { initAllRatings } from './rating.js';
+import { initAllFilters } from './filters.js';
+import { initAllSearchForms } from './search.js';
+import { initAllNavToggles } from './nav-toggle.js';
 import { subscribe, fetchQuote } from './api.js';
 
 initHeaderBurger();
 initHeaderActiveNav();
 initAllSubscribeForms(subscribe);
+initAllRatings();
+initAllFilters();
+initAllSearchForms();
+initAllNavToggles();
 
 const modalRoot = document.querySelector('[data-exercise-modal]');
 const modalController = modalRoot ? initExerciseModal(modalRoot) : null;

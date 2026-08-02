@@ -12,8 +12,6 @@ import { createCategoryCardHtml } from './templates/category-card.js';
 import { createExerciseCardHtml } from './templates/exercise-card.js';
 import { createPaginationHtml } from './templates/pagination.js';
 import { mapExercise } from './map-exercise.js';
-import { initFilters } from './filters.js';
-import { initSearch } from './search.js';
 import { renderRating } from './rating.js';
 
 const CATEGORIES_PAGE_SIZE = 12;
@@ -30,8 +28,8 @@ export function initHomePage({ sectionEl, modalController }) {
   const emptyEl = sectionEl.querySelector('[data-exercises-empty]');
   const paginationEl = sectionEl.querySelector('[data-exercises-pagination]');
 
-  initFilters(filtersEl);
-  initSearch(searchForm);
+  // initFilters/initSearch are wired globally in main.js (initAllFilters/
+  // initAllSearchForms) — this module only adds the fetch-on-change behavior.
 
   filtersEl.addEventListener('filterchange', (event) => {
     state = setFilter(state, event.detail.filter);
