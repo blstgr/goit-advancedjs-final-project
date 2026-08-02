@@ -1,0 +1,66 @@
+.exercise-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border-radius: var(--space-xs);
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+.exercise-card__name {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-lg);
+}
+
+.exercise-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-md);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--color-gray);
+}
+
+.exercise-card__meta-item span {
+  color: var(--color-light);
+}
+
+.exercise-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.exercise-card__start-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs) var(--space-lg);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+.exercise-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.exercise-card__favorite-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  border-radius: 50%;
+  border: 1px solid var(--color-border-on-dark);
+  color: var(--color-light);
+}
+
+.exercise-card__favorite-btn img {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+}

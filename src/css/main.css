@@ -12,3 +12,8 @@
 @import './components/header.css';
 @import './components/footer.css';
 @import './components/ui-kit-showcase.css';
+@import './components/filters.css';
+@import './components/category-card.css';
+@import './components/exercise-card.css';
+@import './components/quote.css';
+@import './components/modal.css';

@@ -1,0 +1,37 @@
+<div class="modal" data-exercise-modal aria-hidden="true">
+  <div class="modal__backdrop" data-modal-backdrop></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="exercise-modal-title">
+    <button class="modal__close-btn" type="button" data-modal-close aria-label="Закрити">
+      <img src="/src/images/icon-close.svg" alt="" />
+    </button>
+
+    <div class="modal__media" data-modal-video></div>
+
+    <h2 class="modal__title" id="exercise-modal-title" data-modal-name></h2>
+
+    <div class="rating rating--on-light" data-modal-rating></div>
+
+    <ul class="modal__meta">
+      <li class="modal__meta-item">Target: <span data-modal-target></span></li>
+      <li class="modal__meta-item">Body part: <span data-modal-bodypart></span></li>
+      <li class="modal__meta-item">Popularity: <span data-modal-popularity></span></li>
+      <li class="modal__meta-item">Burned calories: <span data-modal-calories></span>/3 min</li>
+    </ul>
+
+    <p class="modal__description" data-modal-description></p>
+
+    <div class="modal__actions">
+      <button
+        class="btn btn--favorite"
+        type="button"
+        data-modal-favorite-toggle
+        data-favorited="false"
+      >
+        <img class="btn__icon" src="/src/images/icon-heart.svg" alt="" />
+        <span data-modal-favorite-label>Add to favorites</span>
+      </button>
+      <!-- "Give a rating" (own-rating submission tied to email) is an optional MVP feature —
+           see SPECS.md 10. Only render this button once that flow is implemented. -->
+    </div>
+  </div>
+</div>
