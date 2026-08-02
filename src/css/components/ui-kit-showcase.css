@@ -9,7 +9,7 @@
 
 .ui-kit__note {
   margin-top: var(--space-xs);
-  color: var(--color-gray);
+  color: var(--color-muted-on-light);
   font-size: var(--fs-sm);
   line-height: var(--lh-sm);
 }

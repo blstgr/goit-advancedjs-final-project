@@ -15,7 +15,7 @@
 
 .hero__subtitle {
   margin-top: var(--space-sm);
-  color: var(--color-gray);
+  color: var(--color-muted-on-light);
 }
 
 .hero__tags {
@@ -36,6 +36,7 @@
 
 .hero__img {
   width: 100%;
+  height: auto;
   border-radius: var(--space-xs);
 }
 

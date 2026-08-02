@@ -54,7 +54,7 @@
   font-size: var(--fs-xl);
   line-height: var(--lh-xl);
   letter-spacing: 0.04em;
-  color: var(--color-gray);
+  color: var(--color-muted-on-light);
 }
 
 .pagination__num.is-active {
@@ -65,5 +65,5 @@
 .pagination__ellipsis {
   font-size: var(--fs-xl);
   line-height: var(--lh-xl);
-  color: var(--color-gray);
+  color: var(--color-muted-on-light);
 }

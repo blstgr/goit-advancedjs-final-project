@@ -28,7 +28,7 @@
 
 .exercises__empty {
   margin-top: var(--space-lg);
-  color: var(--color-gray);
+  color: var(--color-muted-on-light);
 }
 
 .exercises__grid {

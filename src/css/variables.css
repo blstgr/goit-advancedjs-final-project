@@ -6,6 +6,14 @@
   --color-accent: #eea10c;
   --color-white: #ffffff;
 
+  /*
+   * --color-gray (#d4d4d4) only has enough contrast on dark surfaces
+   * (~10.7:1 against --color-dark). On white/light surfaces it fails
+   * WCAG AA (1.48:1) — use this token instead for muted text on light
+   * backgrounds (~5.3:1 against white).
+   */
+  --color-muted-on-light: #6b6b6b;
+
   --color-border-on-dark: rgba(244, 244, 244, 0.1);
   --color-border-on-light: rgba(36, 36, 36, 0.1);
 
