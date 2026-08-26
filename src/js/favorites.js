@@ -28,6 +28,19 @@ export function initFavoritesPage({ gridEl, emptyEl, modalController }) {
     }
   });
 
+  // The exercise card is a non-native `role="button"` (it can't be a real
+  // <button> — it contains the nested remove-favorite button, and buttons
+  // can't nest), so Enter/Space activation has to be wired manually.
+  gridEl.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    if (event.target.closest('[data-remove-favorite]')) return;
+    const trigger = event.target.closest('[data-open-exercise]');
+    if (!trigger) return;
+
+    event.preventDefault();
+    trigger.click();
+  });
+
   render();
 
   return { render };

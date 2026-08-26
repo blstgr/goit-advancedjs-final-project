@@ -1,0 +1,92 @@
+.card {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+  border-radius: var(--space-md);
+  background-color: var(--color-white);
+  color: var(--color-dark);
+}
+
+.card--inverted {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+.card__icon {
+  width: var(--size-icon-card-w);
+  height: var(--size-icon-lg);
+  flex-shrink: 0;
+}
+
+/* Matches the base h3 style — these are <h2> now (heading hierarchy fix, DoD 6.3), not bare h3s, so the size needs to be reapplied explicitly. */
+.card__title {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-xl);
+  font-weight: 500;
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  min-width: 0;
+}
+
+.card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.card__title-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.card__subtitle {
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
+  color: var(--color-muted-on-light);
+}
+
+.card--inverted .card__subtitle {
+  color: var(--color-muted-on-dark-60);
+}
+
+.card__quote-icon {
+  width: var(--size-icon-xl);
+  height: var(--size-icon-xl);
+  flex-shrink: 0;
+}
+
+.card__text {
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
+}
+
+.card--inverted .card__text {
+  /* Reserves ~3 lines so the card doesn't jump once the async quote text arrives. */
+  min-height: calc(var(--lh-text) * 3);
+  color: var(--color-muted-on-dark-60);
+}
+
+.card__author {
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+}
+
+.card-media {
+  border-radius: var(--space-md);
+  overflow: hidden;
+  background-color: var(--color-white);
+}
+
+.card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

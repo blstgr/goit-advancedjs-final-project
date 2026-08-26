@@ -43,4 +43,17 @@ describe('initSearch', () => {
     expect(input.value).toBe('');
     expect(form.classList.contains('search--has-value')).toBe(false);
   });
+
+  it('submits the (now-empty) form when the clear button is clicked, so callers can reset filtered results', () => {
+    input.value = 'squat';
+    let submittedValue = 'not called';
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      submittedValue = input.value;
+    });
+
+    clearBtn.click();
+
+    expect(submittedValue).toBe('');
+  });
 });

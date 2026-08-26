@@ -79,4 +79,30 @@ describe('createModal', () => {
     expect(keydownCalls).toHaveLength(1);
     addSpy.mockRestore();
   });
+
+  it('removes the backdrop and close-button click listeners on close, per spec (5.3): all three close mechanisms must have their listeners torn down', () => {
+    const backdrop = rootEl.querySelector('[data-modal-backdrop]');
+    const closeBtn = rootEl.querySelector('[data-modal-close]');
+    const backdropRemoveSpy = vi.spyOn(backdrop, 'removeEventListener');
+    const closeBtnRemoveSpy = vi.spyOn(closeBtn, 'removeEventListener');
+    const modal = createModal(rootEl);
+
+    modal.open();
+    modal.close();
+
+    expect(backdropRemoveSpy).toHaveBeenCalledWith('click', expect.any(Function));
+    expect(closeBtnRemoveSpy).toHaveBeenCalledWith('click', expect.any(Function));
+  });
+
+  it('calls onClose exactly once per backdrop click across an open/close/reopen cycle (no duplicate listeners stacking up)', () => {
+    const onClose = vi.fn();
+    const modal = createModal(rootEl, { onClose });
+
+    modal.open();
+    modal.close();
+    modal.open();
+    rootEl.querySelector('[data-modal-backdrop]').click();
+
+    expect(onClose).toHaveBeenCalledTimes(2);
+  });
 });

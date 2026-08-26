@@ -2,6 +2,8 @@
 
 Фітнес-застосунок для курсового командного проєкту **Advanced JavaScript and TypeScript: Tools and Best Practices** (GoIT). Технічне завдання й прогрес — у [`SPECS.md`](./SPECS.md).
 
+> Проєкт заплановано як командний, але виконаний одноосібно — усі коміти й pull request'и належать одному учаснику, який поєднав ролі розробника, Team Lead та Scrum Master.
+
 ## Стек
 
 Vite, vanilla HTML/CSS/JS, [`modern-normalize`](https://github.com/sindresorhus/modern-normalize), [`vite-plugin-html-inject`](https://github.com/donnikitos/vite-plugin-html-inject) для HTML-партиалів, [Vitest](https://vitest.dev/) для юніт-тестів. Backend — готовий API: `https://your-energy.b.goit.study/api` ([`api-docs`](https://your-energy.b.goit.study/api-docs)).

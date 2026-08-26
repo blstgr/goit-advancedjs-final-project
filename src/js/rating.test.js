@@ -40,4 +40,15 @@ describe('renderRating', () => {
 
     expect(el.getAttribute('aria-label')).toBe('Рейтинг 3.0 з 5');
   });
+
+  it('renders a single filled star (no 5-star row) when the rating--single modifier is present', () => {
+    document.body.innerHTML = `<div class="rating rating--single" data-rating="3.7"></div>`;
+    const el = document.querySelector('[data-rating]');
+    renderRating(el);
+
+    const stars = el.querySelectorAll('.rating__star');
+    expect(stars).toHaveLength(1);
+    expect(stars[0].classList.contains('is-filled')).toBe(true);
+    expect(el.querySelector('.rating__value').textContent).toBe('3.7');
+  });
 });

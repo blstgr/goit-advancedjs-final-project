@@ -1,59 +1,61 @@
-.quote {
-  display: grid;
-  grid-template-columns: 1fr;
+.quote-sidebar {
+  --quote-sidebar-max-width: 444px;
+  --quote-sidebar-media-col: 288px;
+
+  display: flex;
+  flex-direction: column;
   gap: var(--space-lg);
-  padding: var(--space-lg);
-  border-radius: var(--space-xs);
-  background-color: var(--color-dark);
-  color: var(--color-light);
+  width: 100%;
 }
 
-.quote__quote-mark {
-  display: block;
-  font-size: var(--fs-xl);
-  line-height: 1;
-  color: var(--color-accent);
+.quote-sidebar__media {
+  aspect-ratio: 444 / 242;
 }
 
-.quote__text {
-  margin-top: var(--space-xs);
-  font-size: var(--fs-lg);
-  line-height: var(--lh-lg);
+@media (min-width: 1200px) {
+  .quote-sidebar {
+    max-width: var(--quote-sidebar-max-width);
+  }
 }
 
-.quote__author {
-  display: block;
-  margin-top: var(--space-xs);
-  color: var(--color-gray);
-  font-size: var(--fs-sm);
-  line-height: var(--lh-sm);
+/*
+ * Below desktop, quote-sidebar sits below the exercises grid instead of
+ * above it — tablet keeps that order but also switches the sidebar itself
+ * into a 2-col layout (quote + news cards stacked in col 1, the photo
+ * narrower in col 2), matching Figma; mobile stays a single column.
+ */
+@media (max-width: 1199.98px) {
+  .quote-sidebar {
+    order: 1;
+  }
+
+  .quote-sidebar__media img {
+    transform: scale(1.6);
+  }
 }
 
-.quote__info-block {
-  position: relative;
-  padding-top: var(--space-lg);
-}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .quote-sidebar {
+    display: grid;
+    grid-template-columns: 1fr var(--quote-sidebar-media-col);
+    grid-template-areas:
+      'quote media'
+      'news .';
+    gap: var(--space-lg);
+  }
 
-.quote__info-icon {
-  width: var(--size-icon-lg);
-  height: var(--size-icon-lg);
-}
+  .quote-sidebar > .card--inverted {
+    grid-area: quote;
+  }
 
-.quote__info-title {
-  margin-top: var(--space-sm);
-  font-size: var(--fs-lg);
-  line-height: var(--lh-lg);
-}
+  /* Match the quote card's own (content-driven) height instead of the fixed 444/242 ratio used elsewhere. */
+  .quote-sidebar__media {
+    grid-area: media;
+    aspect-ratio: auto;
+    height: 100%;
+  }
 
-.quote__info-text {
-  margin-top: var(--space-sm);
-  color: var(--color-gray);
-  font-size: var(--fs-sm);
-  line-height: var(--lh-sm);
-}
-
-@media (min-width: 768px) {
-  .quote {
-    grid-template-columns: 1fr 1fr;
+  .quote-sidebar > .card:not(.card--inverted) {
+    grid-area: news;
   }
 }

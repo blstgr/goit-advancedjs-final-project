@@ -30,7 +30,7 @@
   background-color: var(--color-white);
 }
 
-/* Outline pill button on dark surfaces — e.g. "Give a rating" in the exercise modal */
+/* Outline pill button on dark surfaces — e.g. "Rate" in the exercise modal */
 .btn--outline {
   background-color: transparent;
   color: var(--color-light);

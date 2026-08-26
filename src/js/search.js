@@ -14,6 +14,7 @@ export function initSearch(form) {
     input.value = '';
     syncState();
     input.focus();
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   });
 
   syncState();

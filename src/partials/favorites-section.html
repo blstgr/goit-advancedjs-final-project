@@ -1,7 +1,15 @@
 <section class="exercises container" data-favorites-section>
   <h1 class="exercises__title">Favorites</h1>
-  <p class="exercises__empty" data-favorites-empty hidden>
-    Ще немає улюблених вправ. Додайте їх з головної сторінки.
-  </p>
-  <div class="exercises__grid" data-favorites-grid></div>
+
+  <div class="exercises__body">
+    <load src="src/partials/quote-widget.html" />
+
+    <div class="exercises__main">
+      <p class="exercises__empty" data-favorites-empty hidden>
+        It appears that you haven't added any exercises to your favorites yet. To get started,
+        you can add exercises that you like to your favorites for easier access in the future.
+      </p>
+      <div class="exercises__grid exercises__grid--list" data-favorites-grid></div>
+    </div>
+  </div>
 </section>

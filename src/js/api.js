@@ -39,11 +39,14 @@ export function fetchQuote() {
   return requestJson(`${API_BASE_URL}/quote`);
 }
 
-export function rateExercise(id, rate) {
+export function rateExercise(id, { rate, email, comment } = {}) {
   return requestJson(`${API_BASE_URL}/exercises/${id}/rating`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ rate }),
+    // The API's field for the comment text is `review`, not `comment` — sending
+    // `comment` gets a 400 ("comment is not allowed"). Renamed only at this
+    // boundary so the rest of the app can keep calling it `comment`.
+    body: JSON.stringify({ rate, email, review: comment }),
   });
 }
 

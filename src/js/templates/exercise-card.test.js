@@ -11,15 +11,26 @@ const BASE = {
 };
 
 describe('createExerciseCardHtml', () => {
-  it('renders the exercise data and a Start button wired to the exercise id', () => {
+  it('renders the exercise data', () => {
     const html = createExerciseCardHtml(BASE);
 
     expect(html).toContain('Push-up');
     expect(html).toContain('Chest');
     expect(html).toContain('Pectorals');
-    expect(html).toContain('8/3 min');
-    expect(html).toContain('data-open-exercise="ex-1"');
+    expect(html).toContain('8 / 3 min');
     expect(html).toContain('data-rating="4"');
+  });
+
+  it('makes the whole card clickable and keyboard-focusable, wired to the exercise id — not just the Start text', () => {
+    const html = createExerciseCardHtml(BASE);
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    const card = container.querySelector('.exercise-card');
+
+    expect(card.dataset.openExercise).toBe('ex-1');
+    expect(card.getAttribute('role')).toBe('button');
+    expect(card.getAttribute('tabindex')).toBe('0');
+    expect(card.querySelector('.exercise-card__start[data-open-exercise]')).toBeNull();
   });
 
   it('omits the remove-from-favorites button by default', () => {

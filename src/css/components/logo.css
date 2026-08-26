@@ -4,8 +4,20 @@
 }
 
 .logo__img {
-  width: 132px;
-  height: 24px;
+  --logo-width: 132px;
+
+  display: inline-block;
+  width: var(--logo-width);
+  height: var(--size-icon-xl);
+  background-color: currentColor;
+  mask-image: url('/src/images/logo.svg');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-image: url('/src/images/logo.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
 }
 
 .logo--on-dark {

@@ -54,8 +54,38 @@
   border-radius: var(--space-xs);
 }
 
+.ui-kit__row--column {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.ui-kit__text-lg {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-lg);
+}
+
+.ui-kit__text {
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
+}
+
+.card-media.ui-kit__card-media,
+.category-card.ui-kit__category-card {
+  --ui-kit-demo-box-w: 240px;
+  --ui-kit-demo-box-h: 160px;
+
+  flex-shrink: 0;
+  width: var(--ui-kit-demo-box-w);
+  height: var(--ui-kit-demo-box-h);
+}
+
 @media (min-width: 768px) {
   .ui-kit__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ui-kit__block--wide {
+    grid-column: 1 / -1;
   }
 }

@@ -1,40 +1,47 @@
 <section class="exercises container" data-exercises-section>
   <div class="exercises__head">
-    <button class="exercises__back-btn" type="button" data-exercises-back hidden>
-      <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
-      Categories
-    </button>
+    <h2 class="exercises__title" data-exercises-title>
+      <button class="exercises__title-link" type="button" data-exercises-back>Exercises</button>
+      <span data-exercises-slash hidden>/</span>
+      <span class="exercises__title-category" data-exercises-category hidden></span>
+    </h2>
 
-    <h2 class="exercises__title" data-exercises-title>Exercises</h2>
+    <div class="exercises__controls">
+      <form class="search exercises__search" data-search-form hidden>
+        <label class="visually-hidden" for="exercises-search">Пошук вправ за назвою</label>
+        <input
+          id="exercises-search"
+          class="search__input"
+          type="search"
+          name="keyword"
+          placeholder="Search exercise"
+          data-search-input
+        />
+        <button class="search__submit-btn" type="submit" aria-label="Пошук">
+          <img src="/src/images/icon-search.svg" alt="" />
+        </button>
+        <button class="search__clear-btn" type="button" aria-label="Очистити пошук" data-search-clear>
+          <img src="/src/images/icon-close.svg" alt="" />
+        </button>
+      </form>
 
-    <div class="filters" data-filters>
-      <button class="filters__btn is-active" type="button" data-filter="Muscles">Muscles</button>
-      <button class="filters__btn" type="button" data-filter="Body parts">Body parts</button>
-      <button class="filters__btn" type="button" data-filter="Equipment">Equipment</button>
+      <div class="filters" data-filters>
+        <button class="filters__btn is-active" type="button" data-filter="Muscles">Muscles</button>
+        <button class="filters__btn" type="button" data-filter="Body parts">Body parts</button>
+        <button class="filters__btn" type="button" data-filter="Equipment">Equipment</button>
+      </div>
     </div>
-
-    <form class="search exercises__search" data-search-form hidden>
-      <label class="visually-hidden" for="exercises-search">Пошук вправ за назвою</label>
-      <input
-        id="exercises-search"
-        class="search__input"
-        type="search"
-        name="keyword"
-        placeholder="Search exercise"
-        data-search-input
-      />
-      <button class="search__submit-btn" type="submit" aria-label="Пошук">
-        <img src="/src/images/icon-search.svg" alt="" />
-      </button>
-      <button class="search__clear-btn" type="button" aria-label="Очистити пошук" data-search-clear>
-        <img src="/src/images/icon-close.svg" alt="" />
-      </button>
-    </form>
   </div>
 
-  <p class="exercises__empty" data-exercises-empty hidden>Нічого не знайдено.</p>
+  <div class="exercises__body">
+    <load src="src/partials/quote-widget.html" />
 
-  <div class="exercises__grid" data-exercises-grid></div>
+    <div class="exercises__main">
+      <p class="exercises__empty" data-exercises-empty hidden>Nothing found.</p>
 
-  <nav class="pagination exercises__pagination" data-exercises-pagination aria-label="Пагінація" hidden></nav>
+      <div class="exercises__grid" data-exercises-grid></div>
+
+      <nav class="pagination exercises__pagination" data-exercises-pagination aria-label="Пагінація" hidden></nav>
+    </div>
+  </div>
 </section>
