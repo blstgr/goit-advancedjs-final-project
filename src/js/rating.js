@@ -1,9 +1,12 @@
+import iconStar from '/src/images/icon-star.svg';
+import iconStarFilled from '/src/images/icon-star-filled.svg';
+
 const MAX_STARS = 5;
 
 function createStarImg(isFilled) {
   const img = document.createElement('img');
   img.className = `rating__star${isFilled ? ' is-filled' : ''}`;
-  img.src = isFilled ? '/src/images/icon-star-filled.svg' : '/src/images/icon-star.svg';
+  img.src = isFilled ? iconStarFilled : iconStar;
   img.alt = '';
   return img;
 }

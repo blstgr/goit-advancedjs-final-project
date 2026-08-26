@@ -1,6 +1,8 @@
 import { createModal } from './modal.js';
 import { isFavorite, toggleFavorite } from './favorites-store.js';
 import { renderRating } from './rating.js';
+import iconTrash from '/src/images/icon-trash.svg';
+import iconHeart from '/src/images/icon-heart.svg';
 
 function setFavoriteButtonState(root, favorited) {
   const btn = root.querySelector('[data-modal-favorite-toggle]');
@@ -11,7 +13,7 @@ function setFavoriteButtonState(root, favorited) {
 
   btn.dataset.favorited = String(favorited);
   label.textContent = favorited ? 'Remove from favorites' : 'Add to favorites';
-  if (icon) icon.src = favorited ? '/src/images/icon-trash.svg' : '/src/images/icon-heart.svg';
+  if (icon) icon.src = favorited ? iconTrash : iconHeart;
 }
 
 export function initExerciseModal(

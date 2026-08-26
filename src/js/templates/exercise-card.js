@@ -1,3 +1,7 @@
+import iconTrash from '/src/images/icon-trash.svg';
+import iconArrowRight from '/src/images/icon-arrow-right.svg';
+import iconRunDark from '/src/images/icon-run-dark.svg';
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll('&', '&amp;')
@@ -20,7 +24,7 @@ export function createExerciseCardHtml({
   // regular card with a button swapped in.
   const badgeExtra = showRemoveFromFavorites
     ? `<button class="exercise-card__favorite-btn" type="button" data-remove-favorite="${escapeHtml(id)}" aria-label="Видалити з улюблених">
-        <img src="/src/images/icon-trash.svg" alt="" />
+        <img src="${iconTrash}" alt="" />
       </button>`
     : `<div class="rating rating--single exercise-card__rating" data-rating="${escapeHtml(rating)}"></div>`;
 
@@ -39,11 +43,11 @@ export function createExerciseCardHtml({
         </div>
         <span class="exercise-card__start">
           Start
-          <img class="exercise-card__start-icon" src="/src/images/icon-arrow-right.svg" alt="" />
+          <img class="exercise-card__start-icon" src="${iconArrowRight}" alt="" />
         </span>
       </div>
       <div class="exercise-card__title">
-        <img class="exercise-card__icon" src="/src/images/icon-run-dark.svg" alt="" />
+        <img class="exercise-card__icon" src="${iconRunDark}" alt="" />
         <h3 class="exercise-card__name">${escapeHtml(name)}</h3>
       </div>
       <ul class="exercise-card__meta">

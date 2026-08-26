@@ -1,4 +1,6 @@
 import { createModal } from './modal.js';
+import iconStar from '/src/images/icon-star.svg';
+import iconStarFilled from '/src/images/icon-star-filled.svg';
 
 const MAX_STARS = 5;
 
@@ -9,7 +11,7 @@ function createStarButton(value, onSelect) {
   btn.setAttribute('aria-label', `Оцінити на ${value} з ${MAX_STARS}`);
 
   const img = document.createElement('img');
-  img.src = '/src/images/icon-star.svg';
+  img.src = iconStar;
   img.alt = '';
   btn.appendChild(img);
 
@@ -44,9 +46,7 @@ export function initRatingPopup(root, { rate, onClose } = {}) {
     starButtons.forEach((btn, index) => {
       const isFilled = index + 1 <= value;
       btn.classList.toggle('is-filled', isFilled);
-      btn.querySelector('img').src = isFilled
-        ? '/src/images/icon-star-filled.svg'
-        : '/src/images/icon-star.svg';
+      btn.querySelector('img').src = isFilled ? iconStarFilled : iconStar;
     });
   }
 

@@ -1,5 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { initExerciseModal } from './exercise-modal.js';
+import iconTrash from '/src/images/icon-trash.svg';
+import iconHeart from '/src/images/icon-heart.svg';
 
 function createMemoryStorage() {
   const store = new Map();
@@ -124,13 +126,13 @@ describe('initExerciseModal', () => {
     const icon = root.querySelector('[data-modal-favorite-icon]');
     const favoriteBtn = root.querySelector('[data-modal-favorite-toggle]');
 
-    expect(icon.getAttribute('src')).toBe('/src/images/icon-heart.svg');
+    expect(icon.getAttribute('src')).toBe(iconHeart);
 
     favoriteBtn.click();
-    expect(icon.getAttribute('src')).toBe('/src/images/icon-trash.svg');
+    expect(icon.getAttribute('src')).toBe(iconTrash);
 
     favoriteBtn.click();
-    expect(icon.getAttribute('src')).toBe('/src/images/icon-heart.svg');
+    expect(icon.getAttribute('src')).toBe(iconHeart);
   });
 
   it('toggles back to "Add to favorites" on a second click', () => {
