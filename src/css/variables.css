@@ -16,37 +16,68 @@
 
   --color-border-on-dark: rgba(244, 244, 244, 0.1);
   --color-border-on-light: rgba(36, 36, 36, 0.1);
+  --color-muted-on-dark-40: rgba(244, 244, 244, 0.4);
+  --color-muted-on-dark-60: rgba(244, 244, 244, 0.6);
 
   /* Typography */
   --font-family-base: 'DM Sans', sans-serif;
 
   --fs-sm: 12px;
   --lh-sm: 18px;
+  --fs-text: 14px;
+  --lh-text: 18px;
+  --ls-text: -0.28px;
   --fs-base: 16px;
   --lh-base: 24px;
   --fs-lg: 18px;
   --lh-lg: 24px;
+  --ls-lg: -0.36px;
   --fs-xl: 24px;
   --lh-xl: 32px;
+  --fs-h2: 44px;
+  --lh-h2: 48px;
+  --ls-h2: -0.88px;
+  --fs-display: 74px;
+  --lh-display: 74px;
+  --ls-display: -1.48px;
+  --fs-slogan: 56px;
+  --lh-slogan: 60px;
+  --ls-slogan: -1.12px;
 
   /* Radii */
+  --radius-xs: 2px;
+  --radius-sm: 12px;
+  --radius-md: 15px;
   --radius-pill: 30px;
+  --radius-lg: 40px;
   --radius-track: 60px;
   --radius-icon-box: 10px;
   --radius-page-num: 18px;
 
   /* Spacing */
+  --space-3xs: 2px;
   --space-2xs: 4px;
   --space-xs: 8px;
   --space-sm: 12px;
+  --space-4: 16px; /* sits between --space-sm and --space-md */
   --space-md: 20px;
   --space-lg: 24px;
+  --space-2xl: 32px;
+  --space-xl: 40px;
+  --space-3xl: 64px;
+  --space-4xl: 74px;
+  --space-5xl: 80px;
 
   /* Icon sizes */
+  --size-icon-2xs: 16px;
   --size-icon-xs: 18px;
   --size-icon-sm: 20px;
   --size-icon-md: 28px;
   --size-icon-lg: 32px;
+  --size-icon-card-w: 34px;
+  --size-icon-xl: 24px;
+  --size-icon-2xl: 40px;
+  --size-icon-3xl: 59px;
 
   /* Layout */
   --layout-max-width: 1440px;

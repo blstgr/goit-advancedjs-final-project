@@ -1,15 +1,28 @@
 .container {
-  max-width: 1440px;
+  max-width: var(--layout-max-width);
   margin-inline: auto;
-  padding-inline: 16px;
+  padding-inline: var(--layout-gutter);
 }
 
 .header {
   position: relative;
   z-index: 20;
   padding-block: var(--space-md);
-  border-bottom: 1px solid var(--color-border-on-light);
-  background-color: var(--color-white);
+  background-color: var(--color-light);
+}
+
+/* The X close icon is the animated burger lines, not a separate asset — the header's own strip must go dark too so it blends into the fullscreen panel behind it instead of sitting on a leftover light band. */
+.header:has(.header__nav.is-open) {
+  background-color: var(--color-dark);
+}
+
+.header:has(.header__nav.is-open) .header__burger-line {
+  background-color: var(--color-light);
+}
+
+/* Figma's mobile menu frame has no logo, just the close icon — hide it (not remove) so the burger stays pinned to the same right-aligned spot via `justify-content: space-between`. */
+.header:has(.header__nav.is-open) .logo {
+  visibility: hidden;
 }
 
 .header__inner {
@@ -19,17 +32,22 @@
 }
 
 .header__burger {
+  --header-burger-gap: 5px;
+  --header-burger-travel: 7px;
+
+  position: relative;
+  z-index: 11;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
-  width: 32px;
-  height: 32px;
+  gap: var(--header-burger-gap);
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
 }
 
 .header__burger-line {
   width: 100%;
-  height: 2px;
+  height: var(--space-3xs);
   background-color: var(--color-dark);
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
@@ -48,18 +66,58 @@
 .header__nav.is-open {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-lg);
   position: fixed;
   inset: 0;
   height: 100vh;
-  padding: var(--space-lg) 16px;
-  background-color: var(--color-white);
+  padding: var(--space-lg) var(--layout-gutter);
+  background-color: var(--color-dark);
   z-index: 10;
 }
 
+/*
+ * The desktop `.nav-toggle` is a dark pill wrapping the links — invisible
+ * against this panel's own dark background. Mobile instead shows the links
+ * as plain centered text, so unset the pill chrome rather than reusing it.
+ */
+.header__nav.is-open .nav-toggle {
+  flex-direction: column;
+  background-color: transparent;
+  padding: 0;
+  gap: var(--space-4);
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.header__nav.is-open .nav-toggle__link {
+  padding: 0;
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
+  color: var(--color-light);
+  text-align: center;
+}
+
+.header__nav.is-open .nav-toggle__link.is-active {
+  background-color: transparent;
+  color: var(--color-light);
+}
+
+.header__nav.is-open .socials {
+  margin-top: auto;
+}
+
+.header__nav.is-open .socials__link {
+  border-color: var(--color-border-on-dark);
+}
+
+/* The icons are pre-colored SVG files (#242424 for the light header), not currentColor masks — invert() approximates the light (#F4F4F4) variant without needing a second set of <img> elements. */
+.header__nav.is-open .socials__icon {
+  filter: invert(1);
+}
+
 .header__burger[aria-expanded='true'] .header__burger-line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(var(--header-burger-travel)) rotate(45deg);
 }
 
 .header__burger[aria-expanded='true'] .header__burger-line:nth-child(2) {
@@ -67,7 +125,7 @@
 }
 
 .header__burger[aria-expanded='true'] .header__burger-line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(calc(var(--header-burger-travel) * -1)) rotate(-45deg);
 }
 
 @media (min-width: 768px) {
@@ -75,11 +133,15 @@
     display: none;
   }
 
+  /*
+   * At desktop, nav-toggle and socials must be spread across the full
+   * header row (logo / nav / socials) like Figma's 3-child `justify-between`
+   * — not bunched together with a small gap. `display: contents` removes
+   * this wrapper's own box so its children become direct flex items of
+   * `.header__inner`, while its mobile full-screen panel styles above stay
+   * untouched (that state is driven by `.is-open`, not this breakpoint).
+   */
   .header__nav {
-    display: flex;
-    position: static;
-    height: auto;
-    padding: 0;
-    background: none;
+    display: contents;
   }
 }

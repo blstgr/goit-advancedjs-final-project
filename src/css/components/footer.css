@@ -1,35 +1,98 @@
 .footer {
+  --footer-slogan-max-width: 595px;
+  --footer-contact-max-width: 352px;
+  --footer-copyright-brand-gap: 120px;
+  --footer-tablet-padding-top: 62px;
+
   background-color: var(--color-dark);
   color: var(--color-light);
-  padding-block: var(--space-lg);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-md);
 }
 
 .footer__inner {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: var(--space-lg);
+  justify-content: space-between;
+}
+
+.footer__meta {
+  color: #c6cdd1;
+  opacity: 0.9;
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
+  letter-spacing: var(--ls-text);
+}
+
+.footer__copyright {
+  color: #c6cdd1;
+  opacity: 0.9;
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
+  letter-spacing: var(--ls-text);
 }
 
 .footer__brand {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.footer__brand-top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.footer__slogan-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  max-width: var(--footer-slogan-max-width);
 }
 
 .footer__slogan {
-  font-size: var(--fs-sm);
-  line-height: var(--lh-sm);
-  color: var(--color-gray);
+  color: var(--color-light);
+}
+
+.footer__legal {
+  display: flex;
+  gap: var(--space-xs);
+  color: #c6cdd1;
+  opacity: 0.9;
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
+  letter-spacing: var(--ls-text);
+}
+
+.footer__legal a:hover {
+  color: var(--color-light);
+}
+
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  width: 100%;
+  max-width: var(--footer-contact-max-width);
 }
 
 .footer__subscribe {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.footer__subscribe-heading {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-lg);
 }
 
 .footer__subscribe-message {
-  flex-basis: 100%;
   font-size: var(--fs-sm);
   line-height: var(--lh-sm);
   color: var(--color-gray);
@@ -37,27 +100,103 @@
 }
 
 .footer__subscribe-input {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--color-border-on-dark);
+  border: 1px solid var(--color-light);
   border-radius: var(--radius-pill);
   background-color: transparent;
   color: var(--color-light);
 }
 
 .footer__subscribe-input::placeholder {
-  color: var(--color-gray);
+  color: var(--color-muted-on-dark-60);
 }
 
-@media (min-width: 768px) {
+.footer__subscribe-btn {
+  width: 100%;
+}
+
+/*
+ * Below desktop, the 3-way flex split above (brand / slogan-block / contact)
+ * doesn't match the Figma tablet/mobile groupings (tablet pairs slogan with
+ * the form, not with the legal links; mobile splits brand's own logo/socials
+ * from its copyright line entirely). `display: contents` unwraps the three
+ * wrapper divs so their children become direct grid items of `.footer__inner`,
+ * which can then be regrouped freely per breakpoint via `grid-template-areas`
+ * without touching desktop's markup or CSS above.
+ */
+@media (max-width: 1199.98px) {
+  .footer {
+    padding: var(--space-xl) var(--space-md) var(--space-sm);
+  }
+
   .footer__inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0;
+    grid-template-areas:
+      'brand-top brand-top'
+      'slogan slogan'
+      'form form'
+      'copy-brand copy-brand'
+      'legal copy-year';
+  }
+
+  .footer__brand,
+  .footer__slogan-block,
+  .footer__contact {
+    display: contents;
+  }
+
+  .footer__brand-top {
+    grid-area: brand-top;
+  }
+
+  .footer__slogan {
+    grid-area: slogan;
+    margin-top: var(--space-xl);
   }
 
   .footer__subscribe {
-    width: auto;
+    grid-area: form;
+    margin-top: var(--space-md);
+  }
+
+  .footer__copyright--brand {
+    grid-area: copy-brand;
+    margin-top: var(--footer-copyright-brand-gap);
+  }
+
+  .footer__legal {
+    grid-area: legal;
+    margin-top: var(--space-xs);
+  }
+
+  .footer__copyright--year {
+    grid-area: copy-year;
+    margin-top: var(--space-xs);
+    justify-self: end;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .footer {
+    padding: var(--footer-tablet-padding-top) var(--space-2xl) var(--space-4);
+  }
+
+  .footer__inner {
+    grid-template-columns: auto 1fr auto;
+    column-gap: var(--space-4xl);
+    row-gap: var(--space-2xl);
+    grid-template-areas:
+      'brand-top slogan slogan'
+      'brand-top form form'
+      'copy-brand legal copy-year';
+  }
+
+  .footer__copyright--brand,
+  .footer__legal,
+  .footer__copyright--year {
+    margin-top: var(--space-3xl);
   }
 }

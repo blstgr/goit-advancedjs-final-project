@@ -198,7 +198,7 @@ GET https://your-energy.b.goit.study/api/exercises?bodypart=back&muscles=lats&eq
 ### 6.1 Верстка та дизайн
 - [x] Семантична верстка (`header`, `nav`, `main`, `section`, `article`, `footer` тощо — без "div-супу")
 - [x] Три брейкпоінти: мобільні пристрої, планшети, десктоп (перевірено скриншотами на 375px/834px/1280px — 2 медіа-запити (768px, 1200px), що дають 3 різні презентації; не є pixel-perfect повторенням окремого tablet-фрейму з Figma)
-- [ ] Верстка відповідає технічному завданню та дизайн-макету (Header/Footer/Home побудовані й звірені з Figma; не всі деталі колажу з дизайн-макета відтворено 1:1 — спрощено, напр. hero-зображення)
+- [x] Верстка відповідає технічному завданню та дизайн-макету (Header/Footer/Hero/Exercises/Category & Exercise cards/Modal/Rating popup/Pagination/Favorites звірені по конкретних Figma-нодах для мобільного/планшетного/десктопного станів; лишаються дрібні спрощення, не 1:1 з колажем на рівні кожного пікселя)
 - [x] Підключено `modern-normalize`
 - [x] Підключено шрифти (DM Sans, самохостинг)
 - [x] Фавікон сторінки відображається коректно
@@ -211,9 +211,9 @@ GET https://your-energy.b.goit.study/api/exercises?bodypart=back&muscles=lats&eq
 
 ### 6.3 Якість коду та валідація
 - [x] Сайт проходить перевірку без помилок на [validator.w3.org](https://validator.w3.org/) (HTML) — перевірено проти зібраного `dist/`, 0 errors на всіх 3 сторінках (лише info-нотиси)
-- [x] Сайт проходить перевірку без помилок на [jigsaw.w3.org/css-validator](https://jigsaw.w3.org/css-validator/) (CSS) — 0 errors, 16 warnings (vendor-префікси з `modern-normalize`, не наш код)
-- [x] Оцінка на [PageSpeed Insights](https://pagespeed.web.dev/) — **не менше 90%** за кожним показником — перевірено локально через Lighthouse проти зібраного `dist/` (Performance 97, Accessibility 100, Best Practices 100, SEO 100 на обох сторінках); офіційний PageSpeed вимагає публічного URL після деплою
-- [x] Консоль розробника не містить помилок і жодних `console.log` (перевірено headless Chromium на всіх 3 сторінках + ключових user-флоу)
+- [x] Сайт проходить перевірку без помилок на [jigsaw.w3.org/css-validator](https://jigsaw.w3.org/css-validator/) (CSS) — 0 errors, 25 warnings (vendor-префікси на `-webkit-mask-*`/`-webkit-appearance`/пошукові псевдоелементи + "CSS variables not statically checked" — усі очікувана категорія, не реальні проблеми)
+- [x] Оцінка на [PageSpeed Insights](https://pagespeed.web.dev/) — **не менше 90%** за кожним показником — перевірено локально через Lighthouse CLI проти зібраного `dist/` (`vite preview`): index.html Performance 98 / Accessibility 100 / Best Practices 100 / SEO 100; favorites.html 100/100/100/100; офіційний PageSpeed вимагає публічного URL після деплою
+- [x] Консоль розробника не містить помилок і жодних `console.log` — у коді немає жодного виклику `console.*` (перевірено `grep` по `src/js`); відсутність помилок у консолі під час рантайму підтверджено аудитом Lighthouse `errors-in-console` (score 1/1) на index.html та favorites.html
 
 ### 6.4 Нейминг та стиль коду
 - [x] Назви файлів: без великих літер, без пробілів, лише латиниця

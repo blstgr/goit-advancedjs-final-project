@@ -13,7 +13,7 @@
           <img class="btn__icon" src="/src/images/icon-heart.svg" alt="" data-favorite-icon />
           <span data-favorite-label>Add to favorites</span>
         </button>
-        <button class="btn btn--outline" type="button">Give a rating</button>
+        <button class="btn btn--outline" type="button">Rate</button>
       </div>
     </article>
 
@@ -66,32 +66,7 @@
     <article class="ui-kit__block">
       <h2 class="ui-kit__block-title">Pagination</h2>
       <div class="ui-kit__row">
-        <nav class="pagination" data-pagination aria-label="Пагінація">
-          <div class="pagination__arrows">
-            <button class="pagination__jump-btn" type="button" aria-label="До першої сторінки">
-              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
-              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
-            </button>
-            <button class="pagination__arrow-btn" type="button" aria-label="Попередня сторінка">
-              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
-            </button>
-          </div>
-          <div class="pagination__numbers" data-pagination-numbers>
-            <button class="pagination__num is-active" type="button" data-page="1">1</button>
-            <button class="pagination__num" type="button" data-page="2">2</button>
-            <button class="pagination__num" type="button" data-page="3">3</button>
-            <span class="pagination__ellipsis">...</span>
-          </div>
-          <div class="pagination__arrows">
-            <button class="pagination__arrow-btn pagination__arrow-btn--next" type="button" aria-label="Наступна сторінка">
-              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
-            </button>
-            <button class="pagination__jump-btn pagination__jump-btn--end" type="button" aria-label="До останньої сторінки">
-              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
-              <img class="pagination__icon" src="/src/images/icon-chevron-left.svg" alt="" />
-            </button>
-          </div>
-        </nav>
+        <nav class="pagination" data-pagination aria-label="Пагінація"></nav>
       </div>
     </article>
 
@@ -115,6 +90,92 @@
             </a>
           </li>
         </ul>
+      </div>
+    </article>
+
+    <article class="ui-kit__block ui-kit__block--wide">
+      <h2 class="ui-kit__block-title">Typography</h2>
+      <div class="ui-kit__row ui-kit__row--column">
+        <h1>H1 — Get <em>Body</em> in shape</h1>
+        <h2>H2 — Exercises</h2>
+        <h3>H3 — Quote of the day</h3>
+        <p class="ui-kit__text-lg">Text LG — Transform your physique and embrace a healthier lifestyle.</p>
+        <p class="ui-kit__text">Text — The World Health Organization recommends at least 150 minutes.</p>
+        <p class="text-muted">Text muted — Daily norm of sports</p>
+        <p class="text-slogan">Slogan — Transforming your <em>body</em> shape with us</p>
+      </div>
+    </article>
+
+    <article class="ui-kit__block">
+      <h2 class="ui-kit__block-title">Heading with icon</h2>
+      <div class="ui-kit__row">
+        <h1 class="page-header__heading">
+          <img class="page-header__icon" src="/src/images/icon-sun.svg" alt="" width="40" height="40" />
+          Get <em>Body</em> in shape
+        </h1>
+      </div>
+    </article>
+
+    <article class="ui-kit__block">
+      <h2 class="ui-kit__block-title">Pills</h2>
+      <div class="ui-kit__row">
+        <ul class="pills">
+          <li class="pill">#Sport</li>
+          <li class="pill">#Healthy</li>
+          <li class="pill">#Workout</li>
+          <li class="pill">#Diet</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="ui-kit__block">
+      <h2 class="ui-kit__block-title">Tabs</h2>
+      <div class="ui-kit__row">
+        <div class="filters" data-filters>
+          <button class="filters__btn is-active" type="button" data-filter="Muscles">Muscles</button>
+          <button class="filters__btn" type="button" data-filter="Body parts">Body parts</button>
+          <button class="filters__btn" type="button" data-filter="Equipment">Equipment</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="ui-kit__block ui-kit__block--wide">
+      <h2 class="ui-kit__block-title">Cards</h2>
+      <div class="ui-kit__row">
+        <div class="card card--inverted">
+          <img class="card__icon" src="/src/images/icon-run.svg" alt="" />
+          <div class="card__body">
+            <div class="card__header">
+              <h2 class="card__title">Quote of the day</h2>
+              <img class="card__quote-icon" src="/src/images/icon-quote-mark.svg" alt="" />
+            </div>
+            <blockquote class="card__text">Sample quote text goes here.</blockquote>
+            <cite class="card__author">Author Name</cite>
+          </div>
+        </div>
+
+        <div class="card">
+          <img class="card__icon" src="/src/images/icon-dumbbell.svg" alt="" />
+          <div class="card__body">
+            <div class="card__title-group">
+              <h2 class="card__title">110 min</h2>
+              <p class="card__subtitle">Daily norm of sports</p>
+            </div>
+            <p class="card__text">Sample card body text goes here.</p>
+          </div>
+        </div>
+
+        <div class="card-media ui-kit__card-media">
+          <img src="/src/images/home/break-photo.jpg" alt="" loading="lazy" />
+        </div>
+
+        <div class="category-card ui-kit__category-card">
+          <img class="category-card__img" src="/src/images/home/hero-accent.jpg" alt="" loading="lazy" />
+          <span class="category-card__overlay">
+            <span class="category-card__name">Abductors</span>
+            <span class="category-card__filter">Muscles</span>
+          </span>
+        </div>
       </div>
     </article>
   </div>

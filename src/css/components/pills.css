@@ -1,0 +1,14 @@
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.pill {
+  padding: var(--space-2xs) var(--space-4);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-dark);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--color-dark);
+}

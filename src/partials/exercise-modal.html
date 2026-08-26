@@ -2,36 +2,58 @@
   <div class="modal__backdrop" data-modal-backdrop></div>
   <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="exercise-modal-title">
     <button class="modal__close-btn" type="button" data-modal-close aria-label="Закрити">
-      <img src="/src/images/icon-close.svg" alt="" />
+      <span class="modal__close-icon"></span>
     </button>
 
     <div class="modal__media" data-modal-video></div>
 
-    <h2 class="modal__title" id="exercise-modal-title" data-modal-name></h2>
+    <div class="modal__content">
+      <div class="modal__head">
+        <h3 class="modal__title" id="exercise-modal-title" data-modal-name></h3>
+        <div class="rating" data-modal-rating></div>
+      </div>
 
-    <div class="rating rating--on-light" data-modal-rating></div>
+      <div class="modal__meta-block">
+        <hr class="modal__divider" />
+        <ul class="modal__meta">
+          <li class="modal__meta-item">
+            <span class="modal__meta-label">Target</span>
+            <span class="modal__meta-value" data-modal-target></span>
+          </li>
+          <li class="modal__meta-item">
+            <span class="modal__meta-label">Body Part</span>
+            <span class="modal__meta-value" data-modal-bodypart></span>
+          </li>
+          <li class="modal__meta-item">
+            <span class="modal__meta-label">Equipment</span>
+            <span class="modal__meta-value" data-modal-equipment></span>
+          </li>
+          <li class="modal__meta-item">
+            <span class="modal__meta-label">Popular</span>
+            <span class="modal__meta-value" data-modal-popularity></span>
+          </li>
+          <li class="modal__meta-item">
+            <span class="modal__meta-label">Burned calories</span>
+            <span class="modal__meta-value"><span data-modal-calories></span>/3 min</span>
+          </li>
+        </ul>
+        <hr class="modal__divider" />
+      </div>
 
-    <ul class="modal__meta">
-      <li class="modal__meta-item">Target: <span data-modal-target></span></li>
-      <li class="modal__meta-item">Body part: <span data-modal-bodypart></span></li>
-      <li class="modal__meta-item">Popularity: <span data-modal-popularity></span></li>
-      <li class="modal__meta-item">Burned calories: <span data-modal-calories></span>/3 min</li>
-    </ul>
+      <p class="modal__description" data-modal-description></p>
 
-    <p class="modal__description" data-modal-description></p>
-
-    <div class="modal__actions">
-      <button
-        class="btn btn--favorite"
-        type="button"
-        data-modal-favorite-toggle
-        data-favorited="false"
-      >
-        <img class="btn__icon" src="/src/images/icon-heart.svg" alt="" />
-        <span data-modal-favorite-label>Add to favorites</span>
-      </button>
-      <!-- "Give a rating" (own-rating submission tied to email) is an optional MVP feature —
-           see SPECS.md 10. Only render this button once that flow is implemented. -->
+      <div class="modal__actions">
+        <button
+          class="btn btn--favorite"
+          type="button"
+          data-modal-favorite-toggle
+          data-favorited="false"
+        >
+          <span data-modal-favorite-label>Add to favorites</span>
+          <img class="btn__icon" data-modal-favorite-icon src="/src/images/icon-heart.svg" alt="" />
+        </button>
+        <button class="btn btn--outline" type="button" data-modal-give-rating>Rate</button>
+      </div>
     </div>
   </div>
 </div>

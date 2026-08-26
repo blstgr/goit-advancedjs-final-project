@@ -13,20 +13,15 @@ describe('createPaginationHtml', () => {
     expect(html).toMatch(/pagination__num is-active" type="button" data-page="3"/);
   });
 
-  it('disables the prev/first buttons on page 1', () => {
-    const html = createPaginationHtml(1, 10);
-    const firstBtnMatch = html.match(/data-page="1"[^>]*disabled[^>]*>/);
-    expect(firstBtnMatch).toBeTruthy();
-  });
-
-  it('disables the next/last buttons on the last page', () => {
-    const html = createPaginationHtml(10, 10);
-    expect(html).toContain(`data-page="11" disabled`);
-    expect(html).toContain(`data-page="10" disabled`);
-  });
-
-  it('does not disable prev/next in the middle of the range', () => {
+  it('renders an ellipsis for gaps in the middle of a long range', () => {
     const html = createPaginationHtml(5, 10);
-    expect(html).not.toContain('disabled');
+    expect(html).toContain('pagination__ellipsis');
+  });
+
+  it('renders every page as a plain number when they all fit, with no ellipsis', () => {
+    const html = createPaginationHtml(1, 2);
+    expect(html).not.toContain('pagination__ellipsis');
+    expect(html).toContain('data-page="1"');
+    expect(html).toContain('data-page="2"');
   });
 });

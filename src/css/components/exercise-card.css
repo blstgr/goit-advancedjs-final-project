@@ -1,66 +1,117 @@
 .exercise-card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
-  padding: var(--space-lg);
-  border-radius: var(--space-xs);
-  background-color: var(--color-dark);
-  color: var(--color-light);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  cursor: pointer;
 }
 
-.exercise-card__name {
-  font-size: var(--fs-lg);
-  line-height: var(--lh-lg);
+.exercise-card:focus-visible {
+  outline: var(--space-3xs) solid var(--color-dark);
+  outline-offset: var(--space-3xs);
 }
 
-.exercise-card__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xs) var(--space-md);
-  font-size: var(--fs-sm);
-  line-height: var(--lh-sm);
-  color: var(--color-gray);
-}
-
-.exercise-card__meta-item span {
-  color: var(--color-light);
-}
-
-.exercise-card__footer {
+.exercise-card__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: auto;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
 }
 
-.exercise-card__start-btn {
+.exercise-card__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.exercise-card__badge {
+  padding: var(--space-2xs) var(--space-xs);
+  border: 1px solid var(--color-dark);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.exercise-card__start {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: var(--space-xs) var(--space-lg);
-  border-radius: var(--radius-pill);
-  background-color: var(--color-light);
+  flex-shrink: 0;
+  white-space: nowrap;
+  gap: var(--space-xs);
   color: var(--color-dark);
 }
 
-.exercise-card__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
+.exercise-card__start-icon {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
 }
 
 .exercise-card__favorite-btn {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--size-icon-lg);
-  height: var(--size-icon-lg);
-  border-radius: 50%;
-  border: 1px solid var(--color-border-on-dark);
-  color: var(--color-light);
 }
 
 .exercise-card__favorite-btn img {
-  width: var(--size-icon-sm);
-  height: var(--size-icon-sm);
+  width: var(--size-icon-2xs);
+  height: var(--size-icon-2xs);
+}
+
+/* Favorites-page variant: no rating, a bare trash icon next to the badge, and a uniform row gap instead of the 32/8 split above. */
+.exercise-card--favorite {
+  --exercise-card-favorite-gap: 17px;
+}
+
+.exercise-card--favorite .exercise-card__top {
+  margin-bottom: var(--exercise-card-favorite-gap);
+}
+
+.exercise-card--favorite .exercise-card__title {
+  margin-bottom: var(--exercise-card-favorite-gap);
+}
+
+.exercise-card__title {
+  display: flex;
+  /*
+   * flex-start (not center) so a wrapped 2-line title doesn't pull the icon
+   * down to re-center against the full block — the icon's own margin-top
+   * below does the centering against just the first line, which lands in
+   * the same spot whether the title is 1 line or wraps to more.
+   */
+  align-items: flex-start;
+  gap: var(--space-4);
+  min-width: 0;
+  margin-bottom: var(--space-xs);
+}
+
+.exercise-card__icon {
+  width: var(--size-icon-xl);
+  height: var(--size-icon-xl);
+  /* Half the leading between the 24px icon and the title's 32px line-height, so it lines up with the center of line 1. */
+  margin-top: var(--space-2xs);
+  flex-shrink: 0;
+}
+
+.exercise-card__name {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-xl);
+  text-transform: capitalize;
+}
+
+.exercise-card__meta {
+  --exercise-card-meta-col-gap: 10px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--exercise-card-meta-col-gap);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--color-muted-on-light);
+}
+
+.exercise-card__meta-item span {
+  color: var(--color-dark);
+  text-transform: capitalize;
 }

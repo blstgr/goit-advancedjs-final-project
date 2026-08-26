@@ -1,61 +1,79 @@
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <a href="/" class="logo logo--on-dark" aria-label="YourEnergy — на головну">
-        <img class="logo__img" src="/src/images/logo.svg" alt="YourEnergy" />
-      </a>
-      <p class="footer__slogan">Твоя енергія. Твої результати.</p>
+      <div class="footer__brand-top">
+        <a href="/" class="logo logo--on-dark" aria-label="YourEnergy — на головну">
+          <span class="logo__img" aria-hidden="true"></span>
+        </a>
+
+        <ul class="socials socials--on-dark" aria-label="Соціальні мережі GoIT">
+          <li>
+            <a
+              class="socials__link"
+              href="https://www.facebook.com/goITclub/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              <img class="socials__icon" src="/src/images/social-facebook-light.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a
+              class="socials__link"
+              href="https://www.instagram.com/goitclub/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <img class="socials__icon" src="/src/images/social-instagram-light.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a
+              class="socials__link"
+              href="https://www.youtube.com/c/GoIT"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+            >
+              <img class="socials__icon" src="/src/images/social-youtube-light.svg" alt="" />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <p class="footer__copyright footer__copyright--brand">Your Energy. All rights reserved.</p>
     </div>
 
-    <ul class="socials socials--on-dark" aria-label="Соціальні мережі GoIT">
-      <li>
-        <a
-          class="socials__link"
-          href="https://www.facebook.com/goITclub/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook"
-        >
-          <img class="socials__icon" src="/src/images/social-facebook-light.svg" alt="" />
-        </a>
-      </li>
-      <li>
-        <a
-          class="socials__link"
-          href="https://www.instagram.com/goitclub/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-        >
-          <img class="socials__icon" src="/src/images/social-instagram-light.svg" alt="" />
-        </a>
-      </li>
-      <li>
-        <a
-          class="socials__link"
-          href="https://www.youtube.com/c/GoIT"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="YouTube"
-        >
-          <img class="socials__icon" src="/src/images/social-youtube-light.svg" alt="" />
-        </a>
-      </li>
-    </ul>
+    <div class="footer__slogan-block">
+      <p class="footer__slogan text-slogan">Transforming your <em>body</em> shape with us</p>
+      <p class="footer__legal">
+        <a href="#">Privacy Policy</a>
+        <span aria-hidden="true">/</span>
+        <a href="#">Terms of Service</a>
+      </p>
+    </div>
 
-    <form class="footer__subscribe" data-subscribe-form>
-      <label class="visually-hidden" for="subscribe-email">Email для розсилки</label>
-      <input
-        id="subscribe-email"
-        class="footer__subscribe-input"
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-        pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
-      />
-      <button class="btn btn--outline" type="submit">Send</button>
-      <p class="footer__subscribe-message" data-subscribe-message role="status" aria-live="polite"></p>
-    </form>
+    <div class="footer__contact">
+      <form class="footer__subscribe" data-subscribe-form>
+        <p class="footer__subscribe-heading">Subscribe and learn about new exercises!</p>
+
+        <label class="visually-hidden" for="subscribe-email">Email для розсилки</label>
+        <input
+          id="subscribe-email"
+          class="footer__subscribe-input"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+        />
+        <button class="btn btn--favorite footer__subscribe-btn" type="submit">Send</button>
+        <p class="footer__subscribe-message" data-subscribe-message role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="footer__copyright footer__copyright--year">©2023</p>
+    </div>
   </div>
 </footer>

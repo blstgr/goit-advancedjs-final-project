@@ -1,5 +1,8 @@
 .exercises {
-  padding-block: var(--space-lg);
+  --exercises-padding-bottom: 160px;
+
+  padding-top: var(--space-xl);
+  padding-bottom: var(--exercises-padding-bottom);
 }
 
 .exercises__head {
@@ -8,34 +11,68 @@
   gap: var(--space-md);
 }
 
-.exercises__back-btn {
-  display: inline-flex;
-  align-self: flex-start;
-  align-items: center;
-  gap: var(--space-2xs);
-  color: var(--color-dark);
-}
-
-.exercises__back-btn .pagination__icon {
-  width: var(--size-icon-sm);
-  height: var(--size-icon-sm);
-}
-
 .exercises__title {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+.exercises__title-category {
   font-size: var(--fs-xl);
   line-height: var(--lh-xl);
+  letter-spacing: var(--ls-h2);
+  color: var(--color-muted-on-light);
+  text-transform: capitalize;
+}
+
+.exercises__controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+
+.exercises__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5xl);
+  margin-top: var(--space-lg);
+}
+
+.exercises__main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
 }
 
 .exercises__empty {
-  margin-top: var(--space-lg);
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   color: var(--color-muted-on-light);
 }
 
 .exercises__grid {
+  --exercises-grid-min-height: 300px;
+
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-md);
-  margin-top: var(--space-lg);
+  /*
+   * Reserves rough space for the still-loading API content so the page (and
+   * everything below it, like the footer) doesn't jump once it lands.
+   * align-content: start keeps that reserved height as trailing empty space
+   * instead of stretching a single sparse row (and its cards) to fill it —
+   * grid's default `align-content: normal` behaves like `stretch` here.
+   */
+  align-content: start;
+  min-height: var(--exercises-grid-min-height);
 }
 
 .exercises__pagination {
@@ -51,21 +88,40 @@
     justify-content: space-between;
   }
 
-  .exercises__back-btn {
-    width: 100%;
-  }
-
-  .exercises__search {
-    margin-left: auto;
+  .exercises__controls {
+    flex-direction: row;
+    align-items: center;
   }
 
   .exercises__grid {
+    --exercises-grid-min-height: 400px;
+
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1200px) {
+  .exercises__body {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-2xl);
+  }
+
+  /* Center the empty-state message against the full quote-sidebar height, not just its own tiny content height — scoped to the empty state only, so a populated grid keeps its normal (taller) height. */
+  .exercises__body:has(.exercises__empty:not([hidden])) {
+    align-items: stretch;
+  }
+
   .exercises__grid {
+    --exercises-grid-min-height: 500px;
+
     grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-2xl);
+  }
+
+  /* Exercise list (a category selected) stays 2-up at desktop/tablet — only the categories grid goes to 3. */
+  .exercises__grid--list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

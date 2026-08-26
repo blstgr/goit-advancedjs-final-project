@@ -22,7 +22,8 @@ export function initHomePage({ sectionEl, modalController }) {
 
   const filtersEl = sectionEl.querySelector('[data-filters]');
   const backBtn = sectionEl.querySelector('[data-exercises-back]');
-  const titleEl = sectionEl.querySelector('[data-exercises-title]');
+  const slashEl = sectionEl.querySelector('[data-exercises-slash]');
+  const categoryEl = sectionEl.querySelector('[data-exercises-category]');
   const searchForm = sectionEl.querySelector('[data-search-form]');
   const gridEl = sectionEl.querySelector('[data-exercises-grid]');
   const emptyEl = sectionEl.querySelector('[data-exercises-empty]');
@@ -63,19 +64,28 @@ export function initHomePage({ sectionEl, modalController }) {
     }
   });
 
+  // The exercise card is a non-native `role="button"` (it can't be a real
+  // <button> — it contains the nested favorite/remove-favorite button, and
+  // buttons can't nest), so Enter/Space activation has to be wired manually.
+  gridEl.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    if (event.target.closest('[data-remove-favorite]')) return;
+    const trigger = event.target.closest('[data-open-exercise]');
+    if (!trigger) return;
+
+    event.preventDefault();
+    trigger.click();
+  });
+
   paginationEl.addEventListener('click', (event) => {
     const pageBtn = event.target.closest('[data-page]');
-    if (!pageBtn || pageBtn.disabled) return;
+    if (!pageBtn) return;
 
     state = setPage(state, Number(pageBtn.dataset.page));
     render();
   });
 
   async function render() {
-    backBtn.hidden = !state.category;
-    searchForm.hidden = !state.category;
-    titleEl.textContent = state.category ?? 'Exercises';
-
     if (state.category) {
       await renderExercises();
     } else {
@@ -84,13 +94,16 @@ export function initHomePage({ sectionEl, modalController }) {
   }
 
   async function renderCategories() {
-    paginationEl.hidden = true;
-    paginationEl.innerHTML = '';
-
-    const data = await fetchFilters({ filter: state.filter, page: 1, limit: CATEGORIES_PAGE_SIZE });
+    const data = await fetchFilters({ filter: state.filter, page: state.page, limit: CATEGORIES_PAGE_SIZE });
     const categories = data.results ?? [];
 
+    searchForm.hidden = true;
+    slashEl.hidden = true;
+    categoryEl.hidden = true;
+    categoryEl.textContent = '';
+
     emptyEl.hidden = categories.length > 0;
+    gridEl.classList.remove('exercises__grid--list');
     gridEl.innerHTML = categories
       .map((category) =>
         createCategoryCardHtml({
@@ -100,6 +113,10 @@ export function initHomePage({ sectionEl, modalController }) {
         })
       )
       .join('');
+
+    const paginationHtml = createPaginationHtml(data.page ?? state.page, data.totalPages ?? 1);
+    paginationEl.hidden = !paginationHtml;
+    paginationEl.innerHTML = paginationHtml;
   }
 
   async function renderExercises() {
@@ -108,7 +125,13 @@ export function initHomePage({ sectionEl, modalController }) {
 
     currentExercises = (data.results ?? []).map(mapExercise);
 
+    searchForm.hidden = false;
+    slashEl.hidden = false;
+    categoryEl.hidden = false;
+    categoryEl.textContent = state.category;
+
     emptyEl.hidden = currentExercises.length > 0;
+    gridEl.classList.add('exercises__grid--list');
     gridEl.innerHTML = currentExercises.map((exercise) => createExerciseCardHtml(exercise)).join('');
     gridEl.querySelectorAll('[data-rating]').forEach(renderRating);
 

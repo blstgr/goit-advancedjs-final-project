@@ -1,47 +1,142 @@
-.hero {
-  padding-block: var(--space-lg);
-}
-
-.hero__inner {
-  display: grid;
-  gap: var(--space-lg);
-  align-items: center;
-}
-
-.hero__title {
-  font-size: var(--fs-xl);
-  line-height: var(--lh-xl);
-}
-
-.hero__subtitle {
-  margin-top: var(--space-sm);
-  color: var(--color-muted-on-light);
-}
-
-.hero__tags {
+.page-header {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
-  margin-top: var(--space-lg);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding-top: var(--space-lg);
 }
 
-.hero__tag {
-  padding: var(--space-2xs) var(--space-sm);
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-border-on-light);
-  font-size: var(--fs-sm);
-  line-height: var(--lh-sm);
-  color: var(--color-dark);
+.page-header__title {
+  flex: 1 1 100%;
+  min-width: 0;
 }
 
-.hero__img {
+.page-header__icon {
+  float: left;
+  margin-top: var(--space-3xs);
+  margin-right: var(--space-sm);
+  width: var(--size-icon-2xl);
+  height: var(--size-icon-2xl);
+}
+
+.page-header__subtitle {
+  margin-top: var(--space-4);
+  max-width: 44ch;
+  color: var(--color-muted-on-light);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-lg);
+}
+
+.page-header__media-frame {
+  aspect-ratio: 197 / 100;
+  border-radius: var(--space-md);
+  overflow: hidden;
+}
+
+.page-header__media-img {
   width: 100%;
-  height: auto;
-  border-radius: var(--space-xs);
+  height: 100%;
+  object-fit: cover;
 }
 
+.page-header__pills {
+  justify-content: flex-end;
+}
+
+/*
+ * Mobile has no media-frame accent image and shows the pills below the
+ * hero-banner photo, not below the (hidden) frame — the opposite order
+ * from desktop. `display: contents` unwraps `.page-header__media` so its
+ * two children become direct flex items of `.page-header` and can be
+ * reordered independently of `.hero-banner`, without touching desktop's
+ * markup or CSS.
+ */
+.hero-banner {
+  --hero-banner-img-height: 460px;
+
+  flex: 1 1 100%;
+  order: 1;
+}
+
+.hero-banner__img {
+  width: 100%;
+  height: var(--hero-banner-img-height);
+  object-fit: cover;
+  border-radius: var(--radius-pill);
+}
+
+.page-header__media {
+  display: contents;
+}
+
+.page-header__media-frame {
+  display: none;
+}
+
+.page-header__pills {
+  order: 2;
+}
+
+/*
+ * Tablet keeps the mobile-style stacked layout (title full width, then the
+ * hero photo, then pills below it, no media-frame accent image) — only
+ * true desktop switches to the title-beside-media row. Only the photo's
+ * own size/radius changes at tablet.
+ */
 @media (min-width: 768px) {
-  .hero__inner {
-    grid-template-columns: 1fr 1fr;
+  .hero-banner {
+    --hero-banner-img-height: 550px;
+  }
+
+  .hero-banner__img {
+    border-radius: var(--radius-track);
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-header__icon {
+    width: var(--size-icon-3xl);
+    height: var(--size-icon-3xl);
+  }
+
+  /*
+   * Percentages, not fixed widths — matches Figma's column ratio
+   * (title 639/media 197 of a 1381 row ≈ 46%/14%) while still scaling
+   * fluidly with the container at any width. `flex-grow: 0` keeps each
+   * column at its own proportion instead of stretching to fill the row,
+   * which is what leaves the large gap `justify-content: space-between`
+   * distributes between them — exactly the Figma composition.
+   */
+  .page-header__title {
+    flex: 0 1 50%;
+  }
+
+  .page-header__media {
+    --page-header-media-min-width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 14%;
+    min-width: var(--page-header-media-min-width);
+    gap: var(--space-md);
+  }
+
+  .page-header__media-frame {
+    display: block;
+  }
+
+  .hero-banner {
+    --hero-banner-img-height: 350px;
+
+    order: 0;
+  }
+
+  .page-header__pills {
+    order: 0;
+  }
+
+  .hero-banner__img {
+    border-radius: var(--radius-track);
   }
 }

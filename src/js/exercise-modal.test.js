@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { initExerciseModal } from './exercise-modal.js';
 
 function createMemoryStorage() {
@@ -18,13 +18,16 @@ function renderModalMarkup() {
       <div data-modal-rating></div>
       <span data-modal-target></span>
       <span data-modal-bodypart></span>
+      <span data-modal-equipment></span>
       <span data-modal-popularity></span>
       <span data-modal-calories></span>
       <p data-modal-description></p>
       <div data-modal-video></div>
       <button data-modal-favorite-toggle data-favorited="false">
         <span data-modal-favorite-label>Add to favorites</span>
+        <img data-modal-favorite-icon src="/src/images/icon-heart.svg" />
       </button>
+      <button data-modal-give-rating>Give a rating</button>
     </div>
   `;
   return document.querySelector('[data-exercise-modal]');
@@ -35,6 +38,7 @@ const EXERCISE = {
   name: 'Push-up',
   target: 'Pectorals',
   bodyPart: 'Chest',
+  equipment: 'Body weight',
   popularity: '87%',
   burnedCalories: 8,
   rating: 4,
@@ -59,6 +63,7 @@ describe('initExerciseModal', () => {
     expect(modal.isOpen()).toBe(true);
     expect(root.querySelector('[data-modal-name]').textContent).toBe('Push-up');
     expect(root.querySelector('[data-modal-target]').textContent).toBe('Pectorals');
+    expect(root.querySelector('[data-modal-equipment]').textContent).toBe('Body weight');
     expect(root.querySelector('[data-modal-calories]').textContent).toBe('8');
   });
 
@@ -101,6 +106,33 @@ describe('initExerciseModal', () => {
     expect(JSON.parse(storage.getItem('yourEnergyFavorites'))).toEqual([EXERCISE]);
   });
 
+  it('calls onFavoriteChange so callers (e.g. the favorites grid) can refresh themselves', () => {
+    const onFavoriteChange = vi.fn();
+    const modal = initExerciseModal(root, { storage, onFavoriteChange });
+    modal.open(EXERCISE);
+
+    root.querySelector('[data-modal-favorite-toggle]').click();
+    expect(onFavoriteChange).toHaveBeenCalledTimes(1);
+
+    root.querySelector('[data-modal-favorite-toggle]').click();
+    expect(onFavoriteChange).toHaveBeenCalledTimes(2);
+  });
+
+  it('swaps the icon from heart to trash when favorited, and back on un-favorite', () => {
+    const modal = initExerciseModal(root, { storage });
+    modal.open(EXERCISE);
+    const icon = root.querySelector('[data-modal-favorite-icon]');
+    const favoriteBtn = root.querySelector('[data-modal-favorite-toggle]');
+
+    expect(icon.getAttribute('src')).toBe('/src/images/icon-heart.svg');
+
+    favoriteBtn.click();
+    expect(icon.getAttribute('src')).toBe('/src/images/icon-trash.svg');
+
+    favoriteBtn.click();
+    expect(icon.getAttribute('src')).toBe('/src/images/icon-heart.svg');
+  });
+
   it('toggles back to "Add to favorites" on a second click', () => {
     const modal = initExerciseModal(root, { storage });
     modal.open(EXERCISE);
@@ -126,5 +158,25 @@ describe('initExerciseModal', () => {
     expect(root.querySelector('[data-modal-favorite-label]').textContent).toBe(
       'Remove from favorites'
     );
+  });
+
+  it('opens the rating popup for the current exercise when "Give a rating" is clicked', () => {
+    const ratingPopup = { open: vi.fn(), close: vi.fn() };
+    const modal = initExerciseModal(root, { storage, ratingPopup });
+    modal.open(EXERCISE);
+
+    root.querySelector('[data-modal-give-rating]').click();
+
+    expect(ratingPopup.open).toHaveBeenCalledWith(EXERCISE);
+  });
+
+  it('closes the rating popup when the exercise modal itself is closed', () => {
+    const ratingPopup = { open: vi.fn(), close: vi.fn() };
+    const modal = initExerciseModal(root, { storage, ratingPopup });
+    modal.open(EXERCISE);
+
+    modal.close();
+
+    expect(ratingPopup.close).toHaveBeenCalled();
   });
 });

@@ -13,9 +13,12 @@
 @import './components/footer.css';
 @import './components/ui-kit-showcase.css';
 @import './components/filters.css';
+@import './components/pills.css';
+@import './components/card.css';
 @import './components/category-card.css';
 @import './components/exercise-card.css';
 @import './components/quote.css';
 @import './components/modal.css';
+@import './components/rating-popup.css';
 @import './components/hero.css';
 @import './components/exercises-section.css';

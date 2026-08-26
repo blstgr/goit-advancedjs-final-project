@@ -1,34 +1,33 @@
 .rating {
+  --rating-gap: 7px;
+  --rating-value-line-height: 12px;
+  --rating-star-w: 13px;
+  --rating-star-h: 12px;
+
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2xs);
+  gap: var(--rating-gap);
   font-size: var(--fs-sm);
-  line-height: var(--lh-sm);
+}
+
+.rating__value {
+  display: block;
+  line-height: var(--rating-value-line-height);
 }
 
 .rating__stars {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--rating-gap);
 }
 
 .rating__star {
-  width: var(--size-icon-xs);
-  height: var(--size-icon-xs);
-  color: var(--color-light);
-  opacity: 0.2;
+  display: block;
+  width: var(--rating-star-w);
+  height: var(--rating-star-h);
 }
 
-.rating__star.is-filled {
-  color: var(--color-accent);
-  opacity: 1;
-}
-
-/* Rating on light surfaces (e.g. exercise card on white bg) */
-.rating--on-light .rating__star {
-  color: var(--color-dark);
-}
-
-.rating--on-light .rating__star.is-filled {
-  color: var(--color-accent);
+/* Exercise card: a single accent star next to the value, no 5-star row. */
+.rating--single {
+  gap: var(--space-2xs);
 }

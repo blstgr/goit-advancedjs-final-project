@@ -1,18 +1,42 @@
-<section class="quote" data-quote aria-live="polite">
-  <div>
-    <span class="quote__quote-mark" aria-hidden="true">&ldquo;</span>
-    <blockquote class="quote__text" data-quote-text></blockquote>
-    <cite class="quote__author" data-quote-author></cite>
+<div class="quote-sidebar" data-quote aria-live="polite">
+  <div class="card card--inverted">
+    <img class="card__icon" src="/src/images/icon-run.svg" alt="" />
+    <div class="card__body">
+      <div class="card__header">
+        <h2 class="card__title">Quote of the day</h2>
+        <img class="card__quote-icon" src="/src/images/icon-quote-mark.svg" alt="" />
+      </div>
+      <blockquote class="card__text" data-quote-text></blockquote>
+      <cite class="card__author" data-quote-author></cite>
+    </div>
   </div>
-  <div class="quote__info-block">
-    <img class="quote__info-icon" src="/src/images/favicon.svg" alt="" loading="lazy" />
-    <h3 class="quote__info-title">Daily norm of sports</h3>
-    <p class="quote__info-text">
-      The World Health Organization recommends at least 150 minutes of moderate-intensity aerobic
-      physical activity throughout the week for adults aged 18-64. However, what happens if we
-      adjust that number to 110 minutes every day? While it might seem like a high number to hit,
-      dedicating 110 minutes daily to sporting activities may offer unparalleled benefits to
-      physical health, mental well-being, and overall quality of life.
-    </p>
+
+  <div class="card-media quote-sidebar__media">
+    <img
+      src="/src/images/home/break-photo.jpg"
+      srcset="/src/images/home/break-photo.jpg 900w, /src/images/home/break-photo@2x.jpg 1400w"
+      sizes="444px"
+      alt="Жінки відпочивають після тренування"
+      loading="lazy"
+      width="900"
+      height="600"
+    />
   </div>
-</section>
+
+  <div class="card">
+    <img class="card__icon" src="/src/images/icon-dumbbell.svg" alt="" />
+    <div class="card__body">
+      <div class="card__title-group">
+        <h2 class="card__title">110 min</h2>
+        <p class="card__subtitle">Daily norm of sports</p>
+      </div>
+      <p class="card__text">
+        The World Health Organization recommends at least 150 minutes of moderate-intensity
+        aerobic physical activity throughout the week for adults aged 18-64. However, what happens
+        if we adjust that number to 110 minutes every day? While it might seem like a high number
+        to hit, dedicating 110 minutes daily to sporting activities may offer unparalleled benefits
+        to physical health, mental well-being, and overall quality of life.
+      </p>
+    </div>
+  </div>
+</div>

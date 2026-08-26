@@ -1,5 +1,6 @@
 .search {
   --search-icon-offset: calc(var(--space-md) + var(--size-icon-xs) + var(--space-2xs));
+  --search-hit-area-offset: 3px;
 
   position: relative;
   display: inline-flex;
@@ -19,26 +20,45 @@
   color: var(--color-dark);
 }
 
+/* type="search" ships a native clear button in WebKit/Chromium that duplicates our own .search__clear-btn — disable it so only ours shows. */
+.search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/*
+ * Hit area is bumped to 24px (--size-icon-xl) to meet the accessible touch-
+ * target minimum (was 18px, flagged by Lighthouse) — the visible glyph
+ * inside stays 18px via the nested img rule, and `right` is shifted -3px
+ * (half the 6px growth) on each so the glyph's on-screen position doesn't
+ * move, only its invisible tappable area grows.
+ */
 .search__submit-btn {
   position: absolute;
-  right: var(--space-md);
+  right: calc(var(--space-md) - var(--search-hit-area-offset));
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--size-icon-xs);
-  height: var(--size-icon-xs);
+  width: var(--size-icon-xl);
+  height: var(--size-icon-xl);
   color: var(--color-dark);
 }
 
 .search__clear-btn {
   position: absolute;
-  right: var(--search-icon-offset);
+  right: calc(var(--search-icon-offset) - var(--search-hit-area-offset));
   display: none;
   align-items: center;
   justify-content: center;
+  width: var(--size-icon-xl);
+  height: var(--size-icon-xl);
+  color: var(--color-dark);
+}
+
+.search__submit-btn img,
+.search__clear-btn img {
   width: var(--size-icon-xs);
   height: var(--size-icon-xs);
-  color: var(--color-dark);
 }
 
 .search--has-value .search__clear-btn {

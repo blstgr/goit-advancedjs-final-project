@@ -1,0 +1,43 @@
+<div class="modal rating-popup" data-rating-popup aria-hidden="true">
+  <div class="modal__backdrop" data-modal-backdrop></div>
+  <div class="modal__panel rating-popup__panel" role="dialog" aria-modal="true" aria-labelledby="rating-popup-title">
+    <button class="modal__close-btn" type="button" data-modal-close aria-label="Закрити">
+      <span class="modal__close-icon"></span>
+    </button>
+
+    <form class="rating-popup__form" data-rating-form novalidate>
+      <div class="rating-popup__rating-block">
+        <span class="rating-popup__label" id="rating-popup-title">Rating</span>
+        <div class="rating-input" role="group" aria-label="Rating from 1 to 5">
+          <span class="rating-input__value" data-rating-value>0.0</span>
+          <span class="rating-input__stars" data-rating-stars></span>
+        </div>
+      </div>
+
+      <div class="rating-popup__fields">
+        <label class="visually-hidden" for="rating-popup-email">Email</label>
+        <input
+          id="rating-popup-email"
+          class="rating-popup__input"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+        />
+
+        <label class="visually-hidden" for="rating-popup-comment">Your comment</label>
+        <textarea
+          id="rating-popup-comment"
+          class="rating-popup__textarea"
+          name="comment"
+          placeholder="Your comment"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <button class="btn btn--favorite rating-popup__submit" type="submit">Send</button>
+      <p class="rating-popup__message" data-rating-message role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
