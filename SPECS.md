@@ -212,8 +212,8 @@ GET https://your-energy.b.goit.study/api/exercises?bodypart=back&muscles=lats&eq
 ### 6.3 Якість коду та валідація
 - [x] Сайт проходить перевірку без помилок на [validator.w3.org](https://validator.w3.org/) (HTML) — перевірено проти зібраного `dist/`, 0 errors на всіх 3 сторінках (лише info-нотиси)
 - [x] Сайт проходить перевірку без помилок на [jigsaw.w3.org/css-validator](https://jigsaw.w3.org/css-validator/) (CSS) — 0 errors, 25 warnings (vendor-префікси на `-webkit-mask-*`/`-webkit-appearance`/пошукові псевдоелементи + "CSS variables not statically checked" — усі очікувана категорія, не реальні проблеми)
-- [x] Оцінка на [PageSpeed Insights](https://pagespeed.web.dev/) — **не менше 90%** за кожним показником — перевірено локально через Lighthouse CLI проти зібраного `dist/` (`vite preview`): index.html Performance 98 / Accessibility 100 / Best Practices 100 / SEO 100; favorites.html 100/100/100/100; офіційний PageSpeed вимагає публічного URL після деплою
-- [x] Консоль розробника не містить помилок і жодних `console.log` — у коді немає жодного виклику `console.*` (перевірено `grep` по `src/js`); відсутність помилок у консолі під час рантайму підтверджено аудитом Lighthouse `errors-in-console` (score 1/1) на index.html та favorites.html
+- [x] Оцінка на [PageSpeed Insights](https://pagespeed.web.dev/) — **не менше 90%** за кожним показником — перевірено проти живого публічного URL (https://blstgr.github.io/goit-advancedjs-final-project/) через Lighthouse CLI (сам API pagespeedonline.googleapis.com недоступний без Google Cloud API-ключа з квотою — той самий движок Lighthouse, що й на pagespeed.web.dev, використано напряму): index.html Performance 96 / Accessibility 100 / Best Practices 100 / SEO 100; favorites.html 100/100/100/100. Перший прогін проти live-URL виявив реальний баг (404 на іконках через хардкод `/src/images/...` шляхів у JS, які на GitHub Pages резолвились відносно кореня домену, а не підшляху проєкту) — виправлено, повторний прогін чистий
+- [x] Консоль розробника не містить помилок і жодних `console.log` — у коді немає жодного виклику `console.*` (перевірено `grep` по `src/js`); відсутність помилок у консолі під час рантайму підтверджено аудитом Lighthouse `errors-in-console` (score 1/1) на живому index.html та favorites.html (https://blstgr.github.io/goit-advancedjs-final-project/)
 
 ### 6.4 Нейминг та стиль коду
 - [x] Назви файлів: без великих літер, без пробілів, лише латиниця
@@ -223,12 +223,12 @@ GET https://your-energy.b.goit.study/api/exercises?bodypart=back&muscles=lats&eq
 - [x] Структура папок/файлів відповідає обраному бандлеру (Vite) та задокументованій архітектурі ([2.2](#22-компонентна-архітектура))
 
 ### 6.5 Git та репозиторій
-- [x] Усі робочі гілки, крім `main` та `gh-pages`, видалені перед фінальною здачею (робота велась лише в `main`, інших гілок не створювалось)
+- [x] Усі робочі гілки, крім `main`, видалені перед фінальною здачею (деплой через GitHub Actions, тому окремої `gh-pages` гілки немає); феча-гілки (`spec-compliance-and-css-tokens`, `deploy-github-pages`, `fix-github-pages-asset-paths`) створювались під кожен PR і видалялись одразу після мерджу
 - [x] Історія комітів відображає командну роботу (нема силового переписування спільної історії)
 - [ ] Конфлікти злиття вирішені коректно (без втрати чужого коду) — неприменне, злиттів гілок ще не було
 
 ### 6.6 Деплой та ревʼю
-- [ ] Фінальна версія задеплоєна на GitHub Pages та доступна за публічним посиланням (потребує GitHub-репозиторію та автентифікації користувача)
+- [x] Фінальна версія задеплоєна на GitHub Pages та доступна за публічним посиланням: https://blstgr.github.io/goit-advancedjs-final-project/ (автодеплой через GitHub Actions, `.github/workflows/deploy.yml`, на кожен push у `main`)
 - [ ] Ментор провів код-ревʼю фінальної версії проєкту
 
 ## 7. Формат оцінювання
