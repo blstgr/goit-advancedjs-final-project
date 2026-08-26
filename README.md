@@ -1,6 +1,6 @@
 # YourEnergy
 
-Фітнес-застосунок для курсового командного проєкту **Advanced JavaScript and TypeScript: Tools and Best Practices** (GoIT). Технічне завдання й прогрес — у [`SPECS.md`](./SPECS.md).
+Фітнес-застосунок для курсового командного проєкту **Advanced JavaScript and TypeScript: Tools and Best Practices** (GoIT).
 
 > Проєкт заплановано як командний, але виконаний одноосібно — усі коміти й pull request'и належать одному учаснику, який поєднав ролі розробника, Team Lead та Scrum Master.
 
