@@ -2,14 +2,14 @@ import { createModal } from './modal.js';
 
 const MAX_STARS = 5;
 
-function createStarButton(value, isFilled, onSelect) {
+function createStarButton(value, onSelect) {
   const btn = document.createElement('button');
   btn.type = 'button';
-  btn.className = `rating-input__star${isFilled ? ' is-filled' : ''}`;
+  btn.className = 'rating-input__star';
   btn.setAttribute('aria-label', `Оцінити на ${value} з ${MAX_STARS}`);
 
   const img = document.createElement('img');
-  img.src = isFilled ? '/src/images/icon-star-filled.svg' : '/src/images/icon-star.svg';
+  img.src = '/src/images/icon-star.svg';
   img.alt = '';
   btn.appendChild(img);
 
@@ -17,7 +17,7 @@ function createStarButton(value, isFilled, onSelect) {
   return btn;
 }
 
-export function initRatingPopup(root, { rate, onClose }) {
+export function initRatingPopup(root, { rate, onClose } = {}) {
   const modal = createModal(root, { onClose });
   let currentExercise = null;
   let selectedRating = 0;
@@ -27,14 +27,27 @@ export function initRatingPopup(root, { rate, onClose }) {
   const form = root.querySelector('[data-rating-form]');
   const messageEl = root.querySelector('[data-rating-message]');
 
+  // Stars are built once and toggled in place (not rebuilt per click) so a keyboard user's focus stays on the star they just activated.
+  const starButtons = [];
+  if (starsEl) {
+    for (let i = 1; i <= MAX_STARS; i += 1) {
+      const btn = createStarButton(i, setRating);
+      starsEl.appendChild(btn);
+      starButtons.push(btn);
+    }
+  }
+
   function setRating(value) {
     selectedRating = value;
     if (valueEl) valueEl.textContent = value.toFixed(1);
 
-    starsEl.innerHTML = '';
-    for (let i = 1; i <= MAX_STARS; i += 1) {
-      starsEl.appendChild(createStarButton(i, i <= value, setRating));
-    }
+    starButtons.forEach((btn, index) => {
+      const isFilled = index + 1 <= value;
+      btn.classList.toggle('is-filled', isFilled);
+      btn.querySelector('img').src = isFilled
+        ? '/src/images/icon-star-filled.svg'
+        : '/src/images/icon-star.svg';
+    });
   }
 
   form.addEventListener('submit', async (event) => {

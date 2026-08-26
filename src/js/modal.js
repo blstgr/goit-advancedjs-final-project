@@ -14,6 +14,7 @@ export function createModal(rootEl, { onClose } = {}) {
     if (!isOpen) return;
 
     rootEl.classList.remove('is-open');
+    rootEl.setAttribute('aria-hidden', 'true');
 
     const index = openStack.indexOf(rootEl);
     if (index !== -1) openStack.splice(index, 1);
@@ -38,6 +39,7 @@ export function createModal(rootEl, { onClose } = {}) {
     if (isOpen) return;
 
     rootEl.classList.add('is-open');
+    rootEl.removeAttribute('aria-hidden');
     document.body.classList.add('has-modal-open');
     openStack.push(rootEl);
 

@@ -1,6 +1,5 @@
 .search {
   --search-icon-offset: calc(var(--space-md) + var(--size-icon-xs) + var(--space-2xs));
-  --search-hit-area-offset: 3px;
 
   position: relative;
   display: inline-flex;
@@ -9,7 +8,7 @@
 
 .search__input {
   width: 100%;
-  padding: var(--space-sm) calc(var(--search-icon-offset) + var(--size-icon-xs))
+  padding: var(--space-sm) calc(var(--search-icon-offset) + var(--size-icon-xl))
     var(--space-sm) var(--space-md);
   border: 1px solid var(--color-dark);
   border-radius: var(--radius-pill);
@@ -29,13 +28,16 @@
 /*
  * Hit area is bumped to 24px (--size-icon-xl) to meet the accessible touch-
  * target minimum (was 18px, flagged by Lighthouse) — the visible glyph
- * inside stays 18px via the nested img rule, and `right` is shifted -3px
- * (half the 6px growth) on each so the glyph's on-screen position doesn't
- * move, only its invisible tappable area grows.
+ * inside stays 18px via the nested img rule. Both buttons can be visible
+ * together (submit + clear, once there's a value), only 4px apart at their
+ * original 18px size, so each box grows only on its outer edge (away from
+ * the other button) rather than symmetrically — that keeps the two boxes
+ * from overlapping, at the cost of each glyph shifting ~3px outward from
+ * its original position.
  */
 .search__submit-btn {
   position: absolute;
-  right: calc(var(--space-md) - var(--search-hit-area-offset));
+  right: calc(var(--space-md) + var(--size-icon-xs) - var(--size-icon-xl));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +48,7 @@
 
 .search__clear-btn {
   position: absolute;
-  right: calc(var(--search-icon-offset) - var(--search-hit-area-offset));
+  right: var(--search-icon-offset);
   display: none;
   align-items: center;
   justify-content: center;
