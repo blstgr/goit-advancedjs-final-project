@@ -16,9 +16,12 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
-.claude/scheduled_tasks.lock
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Local tooling / internal tracking docs, not part of the deliverable
+.claude/
+SPECS.md
