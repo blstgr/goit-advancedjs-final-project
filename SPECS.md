@@ -258,5 +258,5 @@ GET https://your-energy.b.goit.study/api/exercises?bodypart=back&muscles=lats&eq
 
 - Точний дедлайн здачі
 - CSS-препроцесор (Sass/Less) чи чистий CSS / CSS Modules
-- Спосіб деплою на GitHub Pages (ручний `gh-pages` бранч чи CI/CD через GitHub Actions)
+- ~~Спосіб деплою на GitHub Pages (ручний `gh-pages` бранч чи CI/CD через GitHub Actions)~~ — вирішено: GitHub Actions (`.github/workflows/deploy.yml`)
 - Розподіл ролей та секцій макета між учасниками команди
