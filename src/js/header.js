@@ -13,14 +13,14 @@ export function initHeaderBurger() {
 }
 
 function normalizePath(path) {
-  return path === '/index.html' ? '/' : path;
+  return path.endsWith('/index.html') ? path.slice(0, -'index.html'.length) : path;
 }
 
-export function markActiveNavLink(navEl, pathname) {
+export function markActiveNavLink(navEl, pathname, base = document.baseURI) {
   const links = navEl.querySelectorAll('.nav-toggle__link');
 
   links.forEach((link) => {
-    const linkPath = new URL(link.getAttribute('href'), 'http://localhost').pathname;
+    const linkPath = new URL(link.getAttribute('href'), base).pathname;
     link.classList.toggle('is-active', normalizePath(linkPath) === normalizePath(pathname));
   });
 }

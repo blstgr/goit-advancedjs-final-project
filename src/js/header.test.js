@@ -11,8 +11,8 @@ function renderHeader() {
 function renderNav() {
   document.body.innerHTML = `
     <nav class="nav-toggle">
-      <a href="/" class="nav-toggle__link is-active">Home</a>
-      <a href="/favorites.html" class="nav-toggle__link">Favorites</a>
+      <a href="./" class="nav-toggle__link is-active">Home</a>
+      <a href="favorites.html" class="nav-toggle__link">Favorites</a>
     </nav>
   `;
   return document.querySelector('.nav-toggle');
@@ -55,7 +55,7 @@ describe('initHeaderBurger', () => {
 describe('markActiveNavLink', () => {
   it('marks Home active on the root path', () => {
     const nav = renderNav();
-    markActiveNavLink(nav, '/');
+    markActiveNavLink(nav, '/', 'http://localhost/');
 
     const [home, favorites] = nav.querySelectorAll('.nav-toggle__link');
     expect(home.classList.contains('is-active')).toBe(true);
@@ -64,7 +64,7 @@ describe('markActiveNavLink', () => {
 
   it('marks Favorites active on /favorites.html', () => {
     const nav = renderNav();
-    markActiveNavLink(nav, '/favorites.html');
+    markActiveNavLink(nav, '/favorites.html', 'http://localhost/');
 
     const [home, favorites] = nav.querySelectorAll('.nav-toggle__link');
     expect(home.classList.contains('is-active')).toBe(false);
@@ -73,8 +73,28 @@ describe('markActiveNavLink', () => {
 
   it('treats /index.html the same as the root path', () => {
     const nav = renderNav();
-    markActiveNavLink(nav, '/index.html');
+    markActiveNavLink(nav, '/index.html', 'http://localhost/');
 
-    expect(nav.querySelector('a[href="/"]').classList.contains('is-active')).toBe(true);
+    expect(nav.querySelector('a[href="./"]').classList.contains('is-active')).toBe(true);
+  });
+
+  // Regression test: GitHub Pages project sites serve from a subpath
+  // (e.g. /goit-advancedjs-final-project/), not the domain root. The old
+  // implementation resolved relative hrefs against a fixed fake base
+  // instead of the real document location, so neither link ever matched
+  // on a subpath deployment — this covers that exact scenario.
+  it('marks the correct link active when served from a subpath, not just the domain root', () => {
+    const nav = renderNav();
+    const base = 'http://localhost/goit-advancedjs-final-project/';
+
+    markActiveNavLink(nav, '/goit-advancedjs-final-project/', base);
+    let [home, favorites] = nav.querySelectorAll('.nav-toggle__link');
+    expect(home.classList.contains('is-active')).toBe(true);
+    expect(favorites.classList.contains('is-active')).toBe(false);
+
+    markActiveNavLink(nav, '/goit-advancedjs-final-project/favorites.html', base);
+    [home, favorites] = nav.querySelectorAll('.nav-toggle__link');
+    expect(home.classList.contains('is-active')).toBe(false);
+    expect(favorites.classList.contains('is-active')).toBe(true);
   });
 });
