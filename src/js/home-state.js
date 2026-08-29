@@ -1,5 +1,5 @@
-export const DEFAULT_FILTER = 'Muscles';
-export const PAGE_SIZE = 10;
+const DEFAULT_FILTER = 'Muscles';
+const PAGE_SIZE = 10;
 
 const FILTER_TO_QUERY_KEY = {
   Muscles: 'muscles',

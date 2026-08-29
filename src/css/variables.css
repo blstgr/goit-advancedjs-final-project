@@ -18,6 +18,7 @@
   --color-border-on-light: rgba(36, 36, 36, 0.1);
   --color-muted-on-dark-40: rgba(244, 244, 244, 0.4);
   --color-muted-on-dark-60: rgba(244, 244, 244, 0.6);
+  --color-footer-muted: #c6cdd1;
 
   /* Typography */
   --font-family-base: 'DM Sans', sans-serif;

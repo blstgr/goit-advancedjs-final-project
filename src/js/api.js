@@ -31,10 +31,6 @@ export function fetchExercises({ bodypart, muscles, equipment, keyword, page, li
   );
 }
 
-export function fetchExerciseById(id) {
-  return requestJson(`${API_BASE_URL}/exercises/${id}`);
-}
-
 export function fetchQuote() {
   return requestJson(`${API_BASE_URL}/quote`);
 }

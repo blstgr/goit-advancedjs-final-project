@@ -1,10 +1,4 @@
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;');
-}
+import { escapeHtml } from './escape-html.js';
 
 export function createCategoryCardHtml({ name, filter, imageUrl }) {
   return `

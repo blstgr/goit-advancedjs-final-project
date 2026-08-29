@@ -17,16 +17,9 @@
   justify-content: space-between;
 }
 
-.footer__meta {
-  color: #c6cdd1;
-  opacity: 0.9;
-  font-size: var(--fs-text);
-  line-height: var(--lh-text);
-  letter-spacing: var(--ls-text);
-}
-
+.footer__meta,
 .footer__copyright {
-  color: #c6cdd1;
+  color: var(--color-footer-muted);
   opacity: 0.9;
   font-size: var(--fs-text);
   line-height: var(--lh-text);
@@ -61,7 +54,7 @@
 .footer__legal {
   display: flex;
   gap: var(--space-xs);
-  color: #c6cdd1;
+  color: var(--color-footer-muted);
   opacity: 0.9;
   font-size: var(--fs-text);
   line-height: var(--lh-text);

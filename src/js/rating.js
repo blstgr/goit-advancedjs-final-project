@@ -1,7 +1,7 @@
 import iconStar from '/src/images/icon-star.svg';
 import iconStarFilled from '/src/images/icon-star-filled.svg';
 
-const MAX_STARS = 5;
+export const MAX_STARS = 5;
 
 function createStarImg(isFilled) {
   const img = document.createElement('img');
