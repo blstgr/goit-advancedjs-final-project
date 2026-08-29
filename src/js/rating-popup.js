@@ -1,8 +1,7 @@
 import { createModal } from './modal.js';
+import { MAX_STARS } from './rating.js';
 import iconStar from '/src/images/icon-star.svg';
 import iconStarFilled from '/src/images/icon-star-filled.svg';
-
-const MAX_STARS = 5;
 
 function createStarButton(value, onSelect) {
   const btn = document.createElement('button');
@@ -23,6 +22,12 @@ export function initRatingPopup(root, { rate, onClose } = {}) {
   const modal = createModal(root, { onClose });
   let currentExercise = null;
   let selectedRating = 0;
+
+  // Bumped every time the popup is (re)opened, so a still-in-flight submit
+  // from a previous session can tell (once it resolves) that it's stale and
+  // must not reset/close what is now a different, newer session.
+  let sessionToken = 0;
+  let isSubmitting = false;
 
   const starsEl = root.querySelector('[data-rating-stars]');
   const valueEl = root.querySelector('[data-rating-value]');
@@ -57,23 +62,32 @@ export function initRatingPopup(root, { rate, onClose } = {}) {
       form.reportValidity();
       return;
     }
-    if (!currentExercise) return;
+    if (!currentExercise || isSubmitting) return;
+
+    const token = sessionToken;
+    isSubmitting = true;
 
     const email = new FormData(form).get('email')?.toString().trim();
     const comment = new FormData(form).get('comment')?.toString().trim();
 
     try {
       await rate(currentExercise.id, { rate: selectedRating, email, comment });
+      if (token !== sessionToken) return;
       form.reset();
       setRating(0);
       modal.close();
     } catch {
+      if (token !== sessionToken) return;
       if (messageEl) messageEl.textContent = 'Щось пішло не так. Спробуйте ще раз.';
+    } finally {
+      if (token === sessionToken) isSubmitting = false;
     }
   });
 
   function open(exercise) {
     currentExercise = exercise;
+    sessionToken += 1;
+    isSubmitting = false;
     if (messageEl) messageEl.textContent = '';
     form.reset();
     setRating(0);

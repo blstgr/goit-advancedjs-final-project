@@ -126,6 +126,49 @@ describe('initRatingPopup', () => {
     expect(root.querySelector('[data-rating-message]').textContent).toContain('не так');
   });
 
+  it('does not fire a second rate() call while the first submission is still in flight', async () => {
+    let resolveRate;
+    const rate = vi.fn(() => new Promise((resolve) => (resolveRate = resolve)));
+    const popup = initRatingPopup(root, { rate });
+    popup.open(EXERCISE);
+
+    selectStar(root, 5);
+    root.querySelector('input[name="email"]').value = 'student@goit.com';
+    submitForm(root);
+    await Promise.resolve();
+    submitForm(root);
+    await Promise.resolve();
+
+    expect(rate).toHaveBeenCalledTimes(1);
+    resolveRate({});
+  });
+
+  it('does not let a slow, stale submission from a previous session reset or close a newly (re)opened session', async () => {
+    let resolveRate;
+    const rate = vi.fn(() => new Promise((resolve) => (resolveRate = resolve)));
+    const popup = initRatingPopup(root, { rate });
+    popup.open(EXERCISE);
+
+    selectStar(root, 5);
+    root.querySelector('input[name="email"]').value = 'student@goit.com';
+    submitForm(root);
+    await Promise.resolve();
+
+    // Close and reopen for a new session before the first request resolves,
+    // and start entering a new rating.
+    popup.close();
+    popup.open(EXERCISE);
+    selectStar(root, 2);
+
+    // The stale request now finally resolves.
+    resolveRate({});
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(popup.isOpen()).toBe(true);
+    expect(root.querySelector('[data-rating-value]').textContent).toBe('2.0');
+  });
+
   it('resets the star selection and message each time it is reopened', () => {
     const popup = initRatingPopup(root, { rate: vi.fn() });
     popup.open(EXERCISE);
