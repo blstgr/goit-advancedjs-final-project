@@ -61,6 +61,7 @@
   --space-xs: 8px;
   --space-sm: 12px;
   --space-4: 16px; /* sits between --space-sm and --space-md */
+  --space-17: 17px; /* exercises page list-grid gap */
   --space-md: 20px;
   --space-lg: 24px;
   --space-2xl: 32px;
