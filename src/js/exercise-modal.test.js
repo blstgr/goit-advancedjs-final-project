@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { initExerciseModal } from './exercise-modal.js';
+import { initRatingPopup } from './rating-popup.js';
 import iconTrash from '/src/images/icon-trash.svg';
 import iconHeart from '/src/images/icon-heart.svg';
 
@@ -162,14 +163,54 @@ describe('initExerciseModal', () => {
     );
   });
 
-  it('opens the rating popup for the current exercise when "Give a rating" is clicked', () => {
+  it('opens the rating popup for the current exercise when "Give a rating" is clicked, passing the button as the focus-restore trigger', () => {
     const ratingPopup = { open: vi.fn(), close: vi.fn() };
     const modal = initExerciseModal(root, { storage, ratingPopup });
     modal.open(EXERCISE);
 
-    root.querySelector('[data-modal-give-rating]').click();
+    const giveRatingBtn = root.querySelector('[data-modal-give-rating]');
+    giveRatingBtn.click();
 
-    expect(ratingPopup.open).toHaveBeenCalledWith(EXERCISE);
+    expect(ratingPopup.open).toHaveBeenCalledWith(EXERCISE, giveRatingBtn);
+  });
+
+  it('returns focus to the "Give a rating" button once the rating popup completes and closes', async () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `
+        <div class="modal" data-rating-popup>
+          <div data-modal-backdrop></div>
+          <button data-modal-close></button>
+          <form data-rating-form novalidate>
+            <span data-rating-value>0.0</span>
+            <div data-rating-stars></div>
+            <input name="email" type="email" required pattern="^\\w+(\\.\\w+)?@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$" />
+            <textarea name="comment"></textarea>
+            <button type="submit">Send</button>
+            <p data-rating-message></p>
+          </form>
+        </div>
+      `
+    );
+    const ratingPopupRoot = document.querySelector('[data-rating-popup]');
+    const ratingPopup = initRatingPopup(ratingPopupRoot, { rate: vi.fn().mockResolvedValue({}) });
+    const modal = initExerciseModal(root, { storage, ratingPopup });
+    modal.open(EXERCISE);
+
+    const giveRatingBtn = root.querySelector('[data-modal-give-rating]');
+    giveRatingBtn.click();
+    expect(ratingPopup.isOpen()).toBe(true);
+
+    ratingPopupRoot.querySelectorAll('[data-rating-stars] button')[4].click();
+    ratingPopupRoot.querySelector('input[name="email"]').value = 'student@goit.com';
+    ratingPopupRoot
+      .querySelector('[data-rating-form]')
+      .dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(ratingPopup.isOpen()).toBe(false);
+    expect(document.activeElement).toBe(giveRatingBtn);
   });
 
   it('closes the rating popup when the exercise modal itself is closed', () => {

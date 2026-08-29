@@ -152,6 +152,33 @@ describe('createModal', () => {
     expect(event.defaultPrevented).toBe(true);
   });
 
+  it('calls onClose before restoring focus, so a caller that un-hides/re-enables the trigger in onClose still successfully refocuses it', () => {
+    const trigger = document.createElement('button');
+    document.body.appendChild(trigger);
+    const callOrder = [];
+    vi.spyOn(trigger, 'focus').mockImplementation(() => callOrder.push('focus'));
+
+    const modal = createModal(rootEl, { onClose: () => callOrder.push('onClose') });
+    modal.open(trigger);
+    modal.close();
+
+    expect(callOrder).toEqual(['onClose', 'focus']);
+  });
+
+  it('restores focus to an explicitly passed trigger instead of document.activeElement at open time', () => {
+    const trigger = document.createElement('button');
+    document.body.appendChild(trigger);
+    const somethingElseFocused = document.createElement('button');
+    document.body.appendChild(somethingElseFocused);
+    somethingElseFocused.focus();
+
+    const modal = createModal(rootEl);
+    modal.open(trigger);
+    modal.close();
+
+    expect(document.activeElement).toBe(trigger);
+  });
+
   it('traps Shift+Tab so it cycles from the first focusable element back to the last', () => {
     const modal = createModal(rootEl);
     modal.open();

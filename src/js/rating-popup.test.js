@@ -169,6 +169,21 @@ describe('initRatingPopup', () => {
     expect(root.querySelector('[data-rating-value]').textContent).toBe('2.0');
   });
 
+  it('keeps keyboard focus on the star button across repeated selections (stars are mutated in place, never rebuilt)', () => {
+    const popup = initRatingPopup(root, { rate: vi.fn() });
+    popup.open(EXERCISE);
+
+    const stars = root.querySelectorAll('[data-rating-stars] button');
+    stars[2].focus();
+    stars[2].click();
+    stars[4].focus();
+    stars[4].click();
+
+    expect(document.activeElement).toBe(stars[4]);
+    // Same DOM node identity across selections, not a fresh element each time.
+    expect(root.querySelectorAll('[data-rating-stars] button')[4]).toBe(stars[4]);
+  });
+
   it('resets the star selection and message each time it is reopened', () => {
     const popup = initRatingPopup(root, { rate: vi.fn() });
     popup.open(EXERCISE);

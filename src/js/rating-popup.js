@@ -3,19 +3,8 @@ import { MAX_STARS } from './rating.js';
 import iconStar from '/src/images/icon-star.svg';
 import iconStarFilled from '/src/images/icon-star-filled.svg';
 
-function createStarButton(value, onSelect) {
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'rating-input__star';
-  btn.setAttribute('aria-label', `Оцінити на ${value} з ${MAX_STARS}`);
-
-  const img = document.createElement('img');
-  img.src = iconStar;
-  img.alt = '';
-  btn.appendChild(img);
-
-  btn.addEventListener('click', () => onSelect(value));
-  return btn;
+function starButtonHtml(value) {
+  return `<button type="button" class="rating-input__star" data-star-value="${value}" aria-label="Оцінити на ${value} з ${MAX_STARS}"><img src="${iconStar}" alt="" /></button>`;
 }
 
 export function initRatingPopup(root, { rate, onClose } = {}) {
@@ -34,14 +23,18 @@ export function initRatingPopup(root, { rate, onClose } = {}) {
   const form = root.querySelector('[data-rating-form]');
   const messageEl = root.querySelector('[data-rating-message]');
 
-  // Stars are built once and toggled in place (not rebuilt per click) so a keyboard user's focus stays on the star they just activated.
-  const starButtons = [];
+  // Stars are built once and toggled in place (not rebuilt per click) so a
+  // keyboard user's focus stays on the star they just activated; one
+  // delegated listener on starsEl (not one per star) handles selection.
+  let starButtons = [];
   if (starsEl) {
-    for (let i = 1; i <= MAX_STARS; i += 1) {
-      const btn = createStarButton(i, setRating);
-      starsEl.appendChild(btn);
-      starButtons.push(btn);
-    }
+    starsEl.innerHTML = Array.from({ length: MAX_STARS }, (_, i) => starButtonHtml(i + 1)).join('');
+    starButtons = Array.from(starsEl.querySelectorAll('.rating-input__star'));
+
+    starsEl.addEventListener('click', (event) => {
+      const btn = event.target.closest('.rating-input__star');
+      if (btn) setRating(Number(btn.dataset.starValue));
+    });
   }
 
   function setRating(value) {
@@ -84,14 +77,14 @@ export function initRatingPopup(root, { rate, onClose } = {}) {
     }
   });
 
-  function open(exercise) {
+  function open(exercise, trigger) {
     currentExercise = exercise;
     sessionToken += 1;
     isSubmitting = false;
     if (messageEl) messageEl.textContent = '';
     form.reset();
     setRating(0);
-    modal.open();
+    modal.open(trigger);
   }
 
   return { open, close: modal.close, isOpen: modal.isOpen };

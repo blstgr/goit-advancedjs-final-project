@@ -58,18 +58,22 @@ export function createModal(rootEl, { onClose } = {}) {
 
     isOpen = false;
 
+    // Run onClose before restoring focus: for stacked modals (e.g. the
+    // rating popup closing back to the exercise modal it was opened on top
+    // of), onClose is what makes the original trigger visible/focusable
+    // again — focusing it any earlier would silently no-op.
+    onClose?.();
+
     if (previouslyFocused && document.contains(previouslyFocused)) {
       previouslyFocused.focus();
     }
     previouslyFocused = null;
-
-    onClose?.();
   }
 
-  function open() {
+  function open(trigger = document.activeElement) {
     if (isOpen) return;
 
-    previouslyFocused = document.activeElement;
+    previouslyFocused = trigger;
 
     rootEl.classList.add('is-open');
     rootEl.removeAttribute('aria-hidden');

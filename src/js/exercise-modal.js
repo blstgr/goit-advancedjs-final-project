@@ -34,8 +34,13 @@ export function initExerciseModal(
   const giveRatingBtn = root.querySelector('[data-modal-give-rating]');
   giveRatingBtn?.addEventListener('click', () => {
     if (!currentExercise) return;
+    // Captured before hiding: in real browsers, giving an ancestor
+    // display:none synchronously blurs a focused descendant, so by the time
+    // ratingPopup.open() ran its own document.activeElement capture it could
+    // already read as <body> instead of this button.
+    const trigger = giveRatingBtn;
     root.classList.add('is-hidden');
-    ratingPopup?.open(currentExercise);
+    ratingPopup?.open(currentExercise, trigger);
   });
 
   function show() {
