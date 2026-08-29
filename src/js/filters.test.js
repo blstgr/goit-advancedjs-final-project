@@ -24,6 +24,17 @@ describe('initFilters', () => {
     expect(buttons[2].classList.contains('is-active')).toBe(true);
   });
 
+  it('sets aria-pressed on the clicked filter and clears it on the rest', () => {
+    const filtersEl = renderFilters();
+    initFilters(filtersEl);
+    const buttons = filtersEl.querySelectorAll('.filters__btn');
+
+    buttons[2].click();
+
+    expect(buttons[0].getAttribute('aria-pressed')).toBe('false');
+    expect(buttons[2].getAttribute('aria-pressed')).toBe('true');
+  });
+
   it('dispatches a filterchange event with the selected filter name', () => {
     const filtersEl = renderFilters();
     initFilters(filtersEl);

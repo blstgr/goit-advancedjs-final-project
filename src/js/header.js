@@ -21,7 +21,13 @@ export function markActiveNavLink(navEl, pathname, base = document.baseURI) {
 
   links.forEach((link) => {
     const linkPath = new URL(link.getAttribute('href'), base).pathname;
-    link.classList.toggle('is-active', normalizePath(linkPath) === normalizePath(pathname));
+    const isActive = normalizePath(linkPath) === normalizePath(pathname);
+    link.classList.toggle('is-active', isActive);
+    if (isActive) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
   });
 }
 

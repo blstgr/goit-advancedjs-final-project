@@ -78,6 +78,15 @@ describe('markActiveNavLink', () => {
     expect(nav.querySelector('a[href="./"]').classList.contains('is-active')).toBe(true);
   });
 
+  it('sets aria-current="page" on the active link and removes it from the rest', () => {
+    const nav = renderNav();
+    markActiveNavLink(nav, '/favorites.html', 'http://localhost/');
+
+    const [home, favorites] = nav.querySelectorAll('.nav-toggle__link');
+    expect(home.hasAttribute('aria-current')).toBe(false);
+    expect(favorites.getAttribute('aria-current')).toBe('page');
+  });
+
   // Regression test: GitHub Pages project sites serve from a subpath
   // (e.g. /goit-advancedjs-final-project/), not the domain root. The old
   // implementation resolved relative hrefs against a fixed fake base

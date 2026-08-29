@@ -9,8 +9,14 @@ describe('createPaginationHtml', () => {
 
   it('marks the current page number as active', () => {
     const html = createPaginationHtml(3, 10);
-    expect(html).toContain('data-page="3">3</button>');
+    expect(html).toContain('data-page="3" aria-current="page">3</button>');
     expect(html).toMatch(/pagination__num is-active" type="button" data-page="3"/);
+  });
+
+  it('does not mark non-current page numbers with aria-current', () => {
+    const html = createPaginationHtml(3, 10);
+    expect(html).toContain('data-page="1">1</button>');
+    expect(html).not.toContain('data-page="1" aria-current');
   });
 
   it('renders an ellipsis for gaps in the middle of a long range', () => {

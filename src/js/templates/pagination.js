@@ -12,7 +12,7 @@ export function createPaginationHtml(currentInput, totalInput) {
     .map((item) =>
       item === '...'
         ? '<span class="pagination__ellipsis">...</span>'
-        : `<button class="pagination__num${item === current ? ' is-active' : ''}" type="button" data-page="${item}">${item}</button>`
+        : `<button class="pagination__num${item === current ? ' is-active' : ''}" type="button" data-page="${item}"${item === current ? ' aria-current="page"' : ''}>${item}</button>`
     )
     .join('');
 }

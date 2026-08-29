@@ -1,14 +1,7 @@
+import { escapeHtml } from './escape-html.js';
 import iconTrash from '/src/images/icon-trash.svg';
 import iconArrowRight from '/src/images/icon-arrow-right.svg';
 import iconRunDark from '/src/images/icon-run-dark.svg';
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;');
-}
 
 export function createExerciseCardHtml({
   id,
@@ -35,6 +28,7 @@ export function createExerciseCardHtml({
       data-open-exercise="${escapeHtml(id)}"
       tabindex="0"
       role="button"
+      aria-label="Відкрити вправу ${escapeHtml(name)}"
     >
       <div class="exercise-card__top">
         <div class="exercise-card__badges">

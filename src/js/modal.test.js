@@ -105,4 +105,69 @@ describe('createModal', () => {
 
     expect(onClose).toHaveBeenCalledTimes(2);
   });
+
+  it('moves focus to the close button on open', () => {
+    const modal = createModal(rootEl);
+
+    modal.open();
+
+    expect(document.activeElement).toBe(rootEl.querySelector('[data-modal-close]'));
+  });
+
+  it('restores focus to whatever triggered the open on close', () => {
+    const trigger = document.createElement('button');
+    document.body.appendChild(trigger);
+    trigger.focus();
+
+    const modal = createModal(rootEl);
+    modal.open();
+    modal.close();
+
+    expect(document.activeElement).toBe(trigger);
+  });
+
+  it('does not throw and does not steal focus if the trigger element is gone by the time the modal closes', () => {
+    const trigger = document.createElement('button');
+    document.body.appendChild(trigger);
+    trigger.focus();
+
+    const modal = createModal(rootEl);
+    modal.open();
+    trigger.remove();
+
+    expect(() => modal.close()).not.toThrow();
+  });
+
+  it('traps Tab so it cycles from the last focusable element back to the first', () => {
+    const modal = createModal(rootEl);
+    modal.open();
+
+    const closeBtn = rootEl.querySelector('[data-modal-close]');
+    closeBtn.focus();
+
+    const event = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true });
+    document.dispatchEvent(event);
+
+    expect(document.activeElement).toBe(closeBtn);
+    expect(event.defaultPrevented).toBe(true);
+  });
+
+  it('traps Shift+Tab so it cycles from the first focusable element back to the last', () => {
+    const modal = createModal(rootEl);
+    modal.open();
+
+    const closeBtn = rootEl.querySelector('[data-modal-close]');
+    closeBtn.focus();
+
+    const event = new KeyboardEvent('keydown', {
+      key: 'Tab',
+      shiftKey: true,
+      bubbles: true,
+      cancelable: true,
+    });
+    document.dispatchEvent(event);
+
+    expect(document.activeElement).toBe(closeBtn);
+    expect(event.defaultPrevented).toBe(true);
+  });
 });

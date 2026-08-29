@@ -5,7 +5,11 @@ export function initFilters(filtersEl) {
     const btn = event.target.closest('.filters__btn');
     if (!btn || !filtersEl.contains(btn)) return;
 
-    buttons.forEach((el) => el.classList.toggle('is-active', el === btn));
+    buttons.forEach((el) => {
+      const isActive = el === btn;
+      el.classList.toggle('is-active', isActive);
+      el.setAttribute('aria-pressed', String(isActive));
+    });
 
     filtersEl.dispatchEvent(
       new CustomEvent('filterchange', {
