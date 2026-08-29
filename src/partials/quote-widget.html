@@ -12,15 +12,22 @@
   </div>
 
   <div class="card-media quote-sidebar__media">
-    <img
-      src="/src/images/home/break-photo.jpg"
-      srcset="/src/images/home/break-photo.jpg 900w, /src/images/home/break-photo@2x.jpg 1400w"
-      sizes="444px"
-      alt="Жінки відпочивають після тренування"
-      loading="lazy"
-      width="900"
-      height="600"
-    />
+    <picture>
+      <source
+        type="image/webp"
+        srcset="/src/images/home/break-photo.webp 900w, /src/images/home/break-photo@2x.webp 1400w"
+        sizes="444px"
+      />
+      <img
+        src="/src/images/home/break-photo.jpg"
+        srcset="/src/images/home/break-photo.jpg 900w, /src/images/home/break-photo@2x.jpg 1400w"
+        sizes="444px"
+        alt="Жінки відпочивають після тренування"
+        loading="lazy"
+        width="900"
+        height="600"
+      />
+    </picture>
   </div>
 
   <div class="card">

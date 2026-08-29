@@ -27,7 +27,8 @@ body {
 }
 
 img,
-svg {
+svg,
+picture {
   display: block;
   max-width: 100%;
 }

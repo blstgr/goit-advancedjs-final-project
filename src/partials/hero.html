@@ -33,15 +33,22 @@
   </div>
 
   <div class="hero-banner">
-    <img
-      class="hero-banner__img"
-      src="/src/images/home/hero.jpg"
-      srcset="/src/images/home/hero.jpg 900w, /src/images/home/hero@2x.jpg 1400w"
-      sizes="100vw"
-      alt="Жінка займається спортом на свіжому повітрі"
-      fetchpriority="high"
-      width="900"
-      height="600"
-    />
+    <picture>
+      <source
+        type="image/webp"
+        srcset="/src/images/home/hero.webp 900w, /src/images/home/hero@2x.webp 1400w"
+        sizes="100vw"
+      />
+      <img
+        class="hero-banner__img"
+        src="/src/images/home/hero.jpg"
+        srcset="/src/images/home/hero.jpg 900w, /src/images/home/hero@2x.jpg 1400w"
+        sizes="100vw"
+        alt="Жінка займається спортом на свіжому повітрі"
+        fetchpriority="high"
+        width="900"
+        height="600"
+      />
+    </picture>
   </div>
 </section>
