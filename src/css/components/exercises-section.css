@@ -75,11 +75,6 @@
   min-height: var(--exercises-grid-min-height);
 }
 
-/* Exercises page's own list grid (category selected) — scoped to [data-exercises-grid] so Favorites, which reuses .exercises__grid--list, keeps its own gap. */
-.exercises__grid[data-exercises-grid].exercises__grid--list {
-  gap: var(--space-17);
-}
-
 .exercises__pagination {
   justify-content: center;
   margin-top: var(--space-lg);

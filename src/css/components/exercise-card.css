@@ -27,6 +27,11 @@
   gap: var(--space-2xs);
 }
 
+/* Exercises page's own badges row — scoped to [data-exercises-grid] so Favorites' badges gap stays at --space-2xs. */
+[data-exercises-grid] .exercise-card__badges {
+  gap: var(--space-17);
+}
+
 .exercise-card__badge {
   padding: var(--space-2xs) var(--space-xs);
   border: 1px solid var(--color-dark);
