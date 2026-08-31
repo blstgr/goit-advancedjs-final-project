@@ -21,7 +21,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Local tooling / internal tracking docs, not part of the deliverable
-.claude/
-SPECS.md
